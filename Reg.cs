@@ -56,10 +56,10 @@ namespace FaceUnlockVocalNode
         public void inserimento(String text, String pasw)
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "tcp:serverappfaceunlock.database.windows.net";
-            builder.UserID = "mario";
-            builder.Password = "faceunlocK94";
-            builder.InitialCatalog = "DBFaceUnlockVocalNode";
+            builder.DataSource = "<nome-server>";
+            builder.UserID = "<id-utente>";
+            builder.Password = "<password-db>";
+            builder.InitialCatalog = "<nome-db>";
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
             {
