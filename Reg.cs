@@ -44,68 +44,31 @@ namespace FaceUnlockVocalNode
 
             password = (EditText)FindViewById(Resource.Id.password);
             pass = password.Text.ToString();
+            
+            MySQL m = new MySQL();
+          
+            Boolean flag= m.inserimentoUtente(user, pass);
 
-            inserimento(user, pass);
             View view = (View)sender;
-            Snackbar.Make(view, "Inserimento effettuato " + user + " " + pass, Snackbar.LengthLong)
-                .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+            if (flag)
+            {
+                Snackbar.Make(view, "Registrazione effettuata", Snackbar.LengthLong)
+                    .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+
+            }
+            else {
+                Snackbar.Make(view, "Errore esiste già un utente con questa email: " + user, Snackbar.LengthLong)
+                 .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+            }
             /*Intent openPage1 = new Intent(this, typeof(Reg));
             StartActivity(openPage1);*/
+
         }
 
-        public void inserimento(String text, String pasw)
-        {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "<nome-server>";
-            builder.UserID = "<id-utente>";
-            builder.Password = "<password-db>";
-            builder.InitialCatalog = "<nome-db>";
-            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-
-            {
-                connection.Open();
-                Console.WriteLine("Connected successfully.");
-
-                Reg.InsertRows(connection, text, pasw);
-
-
-            }
-        }
-
-        static public void InsertRows(SqlConnection connection, String text, String pasw)
-        {
-            SqlParameter parameter;
-
-            using (var command = new SqlCommand())
-            {
-                command.Connection = connection;
-                command.CommandType = DT.CommandType.Text;
-                command.CommandText = @"  
-                            INSERT INTO utente  
-                                    (id,
-                                    username,  
-                                    passw 
-                                    )  
-                                VALUES  
-                                    (@id,  
-                                    @username,  
-                                    @passw  
-                                    ); ";
-                parameter = new SqlParameter("@id", DT.SqlDbType.Int);
-                parameter.Value = 1;
-                command.Parameters.Add(parameter);
-
-                parameter = new SqlParameter("@username", DT.SqlDbType.NVarChar, 50);
-                parameter.Value = text;
-                command.Parameters.Add(parameter);
-
-                parameter = new SqlParameter("@passw", DT.SqlDbType.NVarChar, 16);
-                parameter.Value = pasw;
-                command.Parameters.Add(parameter);
-                command.ExecuteScalar();
-
-            }
-        }
+          
+        
 
     }
 }
+      
+
