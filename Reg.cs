@@ -44,24 +44,24 @@ namespace FaceUnlockVocalNode
 
             password = (EditText)FindViewById(Resource.Id.password);
             pass = password.Text.ToString();
-            
+            Utente u = new Utente(user, pass);
             MySQL m = new MySQL();
           
-            Boolean flag= m.inserimentoUtente(user, pass);
+            Boolean flag= m.inserimentoUtente(u.getUsername(), u.getPassword());
 
             View view = (View)sender;
             if (flag)
             {
-                Snackbar.Make(view, "Registrazione effettuata", Snackbar.LengthLong)
-                    .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+                Intent openPage1 = new Intent(this, typeof(Home));
+                openPage1.PutExtra("username", u.getUsername());
+                StartActivity(openPage1);
 
             }
             else {
                 Snackbar.Make(view, "Errore esiste già un utente con questa email: " + user, Snackbar.LengthLong)
                  .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
             }
-            /*Intent openPage1 = new Intent(this, typeof(Reg));
-            StartActivity(openPage1);*/
+           
 
         }
 

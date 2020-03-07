@@ -20,15 +20,15 @@ namespace FaceUnlockVocalNode
         private static SqlConnectionStringBuilder connessione()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "source";
-            builder.UserID = "id";
-            builder.Password = "passw";
-            builder.InitialCatalog = "catalog";
+            builder.DataSource = "tcp:serverappfaceunlock.database.windows.net";
+            builder.UserID = "mario";
+            builder.Password = "faceunlocK94";
+            builder.InitialCatalog = "DBFaceUnlockVocalNode";
 
             return builder;
         }
 
-        private int maxId()
+        private int maxNota()
         {
             SqlConnectionStringBuilder builder = connessione();
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -36,7 +36,7 @@ namespace FaceUnlockVocalNode
             {
                 connection.Open();
                 StringBuilder sb = new StringBuilder();
-                sb.Append("SELECT MAX(id) From utente;");
+                sb.Append("SELECT MAX(id_nota) From nota;");
 
                 String sql = sb.ToString();
 
@@ -61,8 +61,8 @@ namespace FaceUnlockVocalNode
             }
 
         }
-
-        private Boolean controlloUtente(String email) {
+        public Boolean loginUtente(String username, String password)
+        {
 
             SqlConnectionStringBuilder builder = connessione();
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -70,7 +70,39 @@ namespace FaceUnlockVocalNode
             {
                 connection.Open();
                 StringBuilder sb = new StringBuilder();
-                sb.Append("SELECT * From utente where username= '" + email + "';");
+                sb.Append("SELECT username From utente where username= '" + username + "' AND passw='"+password+"';");
+
+                String sql = sb.ToString();
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Console.WriteLine("{0}", reader.GetString(0));
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+
+            }
+
+        }
+        private Boolean controlloUtente(String username) {
+
+            SqlConnectionStringBuilder builder = connessione();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("SELECT * From utente where username= '" + username + "';");
 
                 String sql = sb.ToString();
 
@@ -100,7 +132,7 @@ namespace FaceUnlockVocalNode
             
            if (controlloUtente( text))
             {
-              int max= maxId();
+             
 
                 SqlConnectionStringBuilder builder = connessione();
 
@@ -117,18 +149,16 @@ namespace FaceUnlockVocalNode
                         command.CommandType = DT.CommandType.Text;
                         command.CommandText = @"  
                             INSERT INTO utente  
-                                    (id,
+                                    (
                                     username,  
                                     passw 
                                     )  
                                 VALUES  
-                                    (@id,  
+                                    (
                                     @username,  
                                     @passw  
                                     ); ";
-                        parameter = new SqlParameter("@id", DT.SqlDbType.Int);
-                        parameter.Value = max+1;
-                        command.Parameters.Add(parameter);
+                       
 
                         parameter = new SqlParameter("@username", DT.SqlDbType.NVarChar, 50);
                         parameter.Value = text;
@@ -147,5 +177,139 @@ namespace FaceUnlockVocalNode
                 return false;
             }
         }
+
+        public void inserimentoNota(String username, Note n)
+        {
+
+                SqlConnectionStringBuilder builder = connessione();
+
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+
+                {
+                    connection.Open();
+                    SqlParameter parameter;
+
+                    using (var command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = DT.CommandType.Text;
+                        command.CommandText = @"  
+                            INSERT INTO nota  
+                                    (
+                                    id_nota,
+                                    titolo,  
+                                    data_nota,
+                                    contenuto,
+                                    username
+                                    )  
+                                VALUES  
+                                    (@id_nota,  
+                                    @titolo,  
+                                    @data_nota,
+                                    @contenuto,
+                                    @username 
+                                    ); ";
+
+                        parameter = new SqlParameter("@id_nota", DT.SqlDbType.NVarChar, 50);
+                        parameter.Value = maxNota()+1;
+                        command.Parameters.Add(parameter);
+
+                        parameter = new SqlParameter("@titolo", DT.SqlDbType.NVarChar, 50);
+                        parameter.Value = n.getTitolo();
+                        command.Parameters.Add(parameter);
+
+
+                        parameter = new SqlParameter("@data_nota", DT.SqlDbType.NVarChar, 50);
+                        parameter.Value = n.getData();
+                        command.Parameters.Add(parameter);
+
+                        parameter = new SqlParameter("@contenuto", DT.SqlDbType.NVarChar, 16);
+                        parameter.Value = n.getContenuto();
+                        command.Parameters.Add(parameter);
+
+                        parameter = new SqlParameter("@username", DT.SqlDbType.NVarChar, 16);
+                        parameter.Value = username;
+                        command.Parameters.Add(parameter);
+
+                        command.ExecuteScalar();
+
+                      
+                    }
+                }
+           
+        }
+
+        public void deleteNota(int id_nota) {
+
+            SqlConnectionStringBuilder builder = connessione();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("delete From nota where id_nota= '" + id_nota + "';");
+
+                String sql = sb.ToString();
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Console.WriteLine("{0} {1} {2} {3}", reader.GetValue(0)); reader.GetString(1); reader.GetString(2); reader.GetString(3));
+
+                            Console.WriteLine("Cancellato");
+
+
+                        }
+                      
+                    }
+                }
+
+            }
+
+
+        }
+
+        public List<Note> getNote(String username)
+        {
+            List<Note> n = new List<Note>();
+            SqlConnectionStringBuilder builder = connessione();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("SELECT id_nota, titolo, data_nota, contenuto From nota where username= '" + username + "' ORDER BY(data_nota);");
+
+                String sql = sb.ToString();
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                           // Console.WriteLine("{0} {1} {2} {3}", reader.GetValue(0)); reader.GetString(1); reader.GetString(2); reader.GetString(3));
+                            Note nota = new Note( );
+                            nota.setId_nota(Convert.ToInt32(reader.GetValue(0)));
+                            nota.setTitolo(reader.GetString(1));
+                            nota.setData(Convert.ToString(reader.GetValue(2)).Substring(0,10));
+                            nota.setContenuto(reader.GetString(3));
+
+                            n.Add(nota);
+                        }
+                        return n;
+                    }
+                }
+
+            }
+
+        }
+
     }
 }
