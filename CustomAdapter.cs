@@ -43,7 +43,7 @@ namespace FaceUnlockVocalNode
             view.FindViewById<TextView>(Resource.Id.titoloNota).Text = item.getTitolo();
             view.FindViewById<TextView>(Resource.Id.dataNota).Text = item.getData();
             view.FindViewById<Button>(Resource.Id.elimina).Text = "Cancella";
-            view.FindViewById<Button>(Resource.Id.elimina).SetTag(1, item.getId_nota());
+            //view.FindViewById<Button>(Resource.Id.elimina).SetTag(1, item.getId_nota());
             return view;
         }
 
