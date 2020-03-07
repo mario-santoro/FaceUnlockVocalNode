@@ -15,9 +15,9 @@ namespace FaceUnlockVocalNode
     public class MainActivity : AppCompatActivity
     {
         // Add your training & prediction key from the settings page of the portal
-        string trainingKey = System.Environment.GetEnvironmentVariable("b3392f8f8c5543a383ae40bcbdcf6eca");
-        string predictionKey = System.Environment.GetEnvironmentVariable("b3392f8f8c5543a383ae40bcbdcf6eca");
-        string ENDPOINT = System.Environment.GetEnvironmentVariable("https://faceunlockvocalnote.cognitiveservices.azure.com/");
+        string trainingKey = System.Environment.GetEnvironmentVariable("");
+        string predictionKey = System.Environment.GetEnvironmentVariable("");
+        string ENDPOINT = System.Environment.GetEnvironmentVariable("");
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
