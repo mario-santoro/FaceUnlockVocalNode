@@ -20,10 +20,10 @@ namespace FaceUnlockVocalNode
         private static SqlConnectionStringBuilder connessione()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "tcp:serverappfaceunlock.database.windows.net";
-            builder.UserID = "mario";
-            builder.Password = "faceunlocK94";
-            builder.InitialCatalog = "DBFaceUnlockVocalNode";
+            builder.DataSource = "";
+            builder.UserID = "";
+            builder.Password = "";
+            builder.InitialCatalog = "";
 
             return builder;
         }
