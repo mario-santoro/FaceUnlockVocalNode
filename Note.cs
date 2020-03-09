@@ -19,13 +19,14 @@ namespace FaceUnlockVocalNode
         private String titolo;
         private String data;
         private String contenuto;
-
+        private String username;
         public Note() { }
-        public Note(int id_nota, String titolo, String data, String contenuto) {
+        public Note(int id_nota, String titolo, String data, String contenuto,String username) {
             this.id_nota = id_nota;
             this.titolo = titolo;
             this.data = data;
             this.contenuto = contenuto;
+            this.username = username;
         }
         public int getId_nota()
         {
@@ -33,6 +34,10 @@ namespace FaceUnlockVocalNode
         }
         public String getTitolo() {
             return titolo;
+        }
+        public String getUsername()
+        {
+            return username;
         }
         public String getData()
         {
@@ -48,6 +53,10 @@ namespace FaceUnlockVocalNode
         public void setData(String data)
         {
             this.data = data;
+        }
+        public void setUsername(String username)
+        {
+            this.username = username;
         }
         public void setContenuto(String contenuto)
         {

@@ -7,6 +7,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
 
@@ -17,6 +18,7 @@ namespace FaceUnlockVocalNode
     {
         public ListView listView;
         String username;
+       List<Note> n;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -27,10 +29,13 @@ namespace FaceUnlockVocalNode
 
             MySQL s = new MySQL();
             
-            List<Note> n = s.getNote(username);
+           n = s.getNote(username);
             // populate the listview with data
             listView.Adapter = new CustomAdapter(this, n);
-            //listView.ItemClick += OnListItemClick;  // to be defined
+           
+
+          
+            
             // Create your application here
 
             Button b = (Button)FindViewById(Resource.Id.addNota);
@@ -41,7 +46,7 @@ namespace FaceUnlockVocalNode
             canc.Click += eliminaOnClick;*/
         }
 
-
+        
         private void noteOnClick(object sender, EventArgs eventArgs)
         {
             
@@ -53,18 +58,5 @@ namespace FaceUnlockVocalNode
 
         }
 
-        /*
-        private void eliminaOnClick(object sender, EventArgs eventArgs)
-        {
-            MySQL s = new MySQL();
-            Button canc = (Button)FindViewById(Resource.Id.elimina);
-            
-            s.deleteNota((int)canc.GetTag(1));
-            Intent openPage1 = new Intent(this, typeof(Home));
-            openPage1.PutExtra("username", username);
-            StartActivity(openPage1);
-
-
-        }*/
     }
 }
