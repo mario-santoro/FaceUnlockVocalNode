@@ -1,2 +1,2 @@
 # FaceUnlockVocalNote
-<img height="204" src="http://marsant.altervista.org/img/portfolio/outletunisa.jpg" >
+<img height="204" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/immagini/rsz_cloud.png" >
