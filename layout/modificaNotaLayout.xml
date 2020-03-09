@@ -1,0 +1,49 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Titolo"
+    android:id="@+id/titoloMod"
+    
+    />
+    <EditText
+        android:layout_weight="1"
+        android:layout_gravity="top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Contenuto"
+    android:id="@+id/contenutoMod"
+    
+    />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+ 
+         android:gravity="bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+
+   
+        
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+       android:id="@+id/registra"
+        android:text="Registra" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Modifica"
+             android:id="@+id/modifica"/>
+        </LinearLayout>
+
+
+</LinearLayout>

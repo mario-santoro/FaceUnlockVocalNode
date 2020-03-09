@@ -1,4 +1,3 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
    android:orientation="vertical"
    android:layout_width="fill_parent"
@@ -13,7 +12,10 @@
         android:textStyle="bold"
         android:padding="5dp"
     />
-    <ListView android:id="@+id/List"
+    <ListView 
+        
+        android:choiceMode="singleChoice"
+        android:id="@+id/List"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
@@ -23,7 +25,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+"  
+        android:text="+"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="true"
         android:layout_gravity="right"
         android:id="@+id/addNota"
     />
