@@ -69,7 +69,7 @@ namespace face_quickstart
             HttpClient client = new HttpClient();
 
             // Request headers.
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "73185574f3d74f51aebe5262d6f31445");
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "XXXXXXXXXXX");
              
             // Request parameters. A third optional parameter is "details".
             string requestParameters = "returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_03&returnRecognitionModel=false&detectionModel=detection_01";
