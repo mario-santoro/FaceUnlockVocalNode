@@ -51,7 +51,7 @@ namespace RiconoscimentoFaccialeProva
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
-            request.Headers.Add("Ocp-Apim-Subscription-Key", "73185574f3d74f51aebe5262d6f31445");
+            request.Headers.Add("Ocp-Apim-Subscription-Key", "x");
             request.Host = "provaFaccia.cognitiveservices.azure.com";
             
             using (var stream = request.GetRequestStream())
@@ -75,7 +75,7 @@ namespace RiconoscimentoFaccialeProva
             HttpClient client = new HttpClient();
 
             // Request headers.
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "73185574f3d74f51aebe5262d6f31445");
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "x");
              
             // Request parameters. A third optional parameter is "details".
             string requestParameters = "returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_03&returnRecognitionModel=false&detectionModel=detection_01";
@@ -133,7 +133,7 @@ namespace RiconoscimentoFaccialeProva
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
-            request.Headers.Add("Ocp-Apim-Subscription-Key", "73185574f3d74f51aebe5262d6f31445");
+            request.Headers.Add("Ocp-Apim-Subscription-Key", "x");
             request.Host = "provaFaccia.cognitiveservices.azure.com";
             
             using (var stream = request.GetRequestStream())
@@ -157,7 +157,7 @@ namespace RiconoscimentoFaccialeProva
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
-            request.Headers.Add("Ocp-Apim-Subscription-Key", "73185574f3d74f51aebe5262d6f31445");
+            request.Headers.Add("Ocp-Apim-Subscription-Key", "x");
             request.Host = "provaFaccia.cognitiveservices.azure.com";
             
             using (var stream = request.GetRequestStream())
@@ -185,7 +185,7 @@ namespace RiconoscimentoFaccialeProva
             request.Method = "PUT";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
-            request.Headers.Add("Ocp-Apim-Subscription-Key", "73185574f3d74f51aebe5262d6f31445");
+            request.Headers.Add("Ocp-Apim-Subscription-Key", "x");
             request.Host = "provaFaccia.cognitiveservices.azure.com";
 
             using (var stream = request.GetRequestStream())
@@ -207,7 +207,7 @@ namespace RiconoscimentoFaccialeProva
         
             var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/"+personGroupId+"/train?recognitionModel=recognition_03");
             request.Method = "POST";
-            request.Headers.Add("Ocp-Apim-Subscription-Key", "73185574f3d74f51aebe5262d6f31445");
+            request.Headers.Add("Ocp-Apim-Subscription-Key", "x");
             request.Host = "provaFaccia.cognitiveservices.azure.com";
 
             var response = (HttpWebResponse)request.GetResponse();
@@ -219,7 +219,7 @@ namespace RiconoscimentoFaccialeProva
             HttpClient client = new HttpClient();
                 
             // Request headers.
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "73185574f3d74f51aebe5262d6f31445");                        
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "x");                        
             
             // Request parameters. A third optional parameter is "details".
             string requestParameters = "detectionModel=detection_01&recognitionModel=recognition_03";
