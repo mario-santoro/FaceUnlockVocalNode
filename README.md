@@ -7,5 +7,6 @@ Ha come scopo quello di utilizzare i servizi offerti da Microsoft Azure.
 Per lo sviluppo dell'applicazione Android usiamo il plugin Xamarin di Visual Studio, implementiamo un database SQL per immagazzinare le informazioni, riconoscimento di immagini per il login e riconoscimento vocale per scrivere le note.
 
 Installazione di pacchetti NuGet
+- System.Data.SqlClient
 - Cognitive services: Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
 - System.Text.Json
