@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using System.Collections.Generic;
 using System.IO;
@@ -20,11 +20,7 @@ namespace face_quickstart
     class Program
     {
         static string id=null;
-
-        // Image you want analyzed (add to your bin/debug/netcoreappX.X folder)
-        // For sample images, download one from here (png or jpg):
-        // https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/ComputerVision/Images
-        //static string imageFilePath = @"img\";
+        static string key=  "XXXXXXXXXXXXXXXXX";      
        
         static void Main(string[] args)
         {
@@ -32,12 +28,14 @@ namespace face_quickstart
                  //Console.WriteLine("Add person group person:");
               //  var personId= addPerson("Orlando Bloom", "Orlando");
 
-              
+              /*
                 Console.WriteLine("Add face to person group person:");
                 
                  addFace( "64bb5eab-5bed-42c0-9459-67512d8f6255",  @"C:\Users\mario\Desktop\DInfUniSa\MagistraleMatricola_866\1anno\1semestre\CloudComputing\face-quickstart\img\ob1.jpg").Wait();
+               */       
+                      
                         // Get the path and filename to process from the user.
-                /*
+                
                 Console.WriteLine("Detect faces:");
                 Console.Write(
                     "Enter the path to an image with faces that you wish to analyze: ");
@@ -48,7 +46,7 @@ namespace face_quickstart
                     try
                     {
                         Console.WriteLine("\nWait a moment for the results to appear.\n");
-                        MakeAnalysisRequest(imageFilePath).Wait();
+                        Detect(imageFilePath).Wait();
                     }
                     catch (Exception e)
                     {
@@ -60,16 +58,18 @@ namespace face_quickstart
                     Console.WriteLine("\nInvalid file path.\n");
                 }
                   Console.WriteLine(id);
-                  identify(id);*/
+                  identify(id);
+                  
+                  
           
         }
         // Gets the analysis of the specified image by using the Face REST API.
-        static async Task MakeAnalysisRequest(string imageFilePath)
+        static async Task Detect(string imageFilePath)
         {
             HttpClient client = new HttpClient();
 
             // Request headers.
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "XXXXXXXXXXX");
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", key);
              
             // Request parameters. A third optional parameter is "details".
             string requestParameters = "returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_03&returnRecognitionModel=false&detectionModel=detection_01";
@@ -193,7 +193,7 @@ namespace face_quickstart
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
-            request.Headers.Add("Ocp-Apim-Subscription-Key", "XXXXXXXXXX");
+            request.Headers.Add("Ocp-Apim-Subscription-Key", "73185574f3d74f51aebe5262d6f31445");
             request.Host = "provaFaccia.cognitiveservices.azure.com";
             
             using (var stream = request.GetRequestStream())
@@ -226,7 +226,7 @@ namespace face_quickstart
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
-            request.Headers.Add("Ocp-Apim-Subscription-Key", "XXXXXXXXXXXXX");
+            request.Headers.Add("Ocp-Apim-Subscription-Key", key);
             request.Host = "provaFaccia.cognitiveservices.azure.com";
             
             using (var stream = request.GetRequestStream())
@@ -248,7 +248,7 @@ namespace face_quickstart
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
-            request.Headers.Add("Ocp-Apim-Subscription-Key", "XXXXXXXXXXXXXX");
+            request.Headers.Add("Ocp-Apim-Subscription-Key", key);
             request.Host = "provaFaccia.cognitiveservices.azure.com";
             
             using (var stream = request.GetRequestStream())
@@ -270,7 +270,7 @@ namespace face_quickstart
             static async Task addFace(string personId, string pathImage){
                 HttpClient client = new HttpClient();
                // Request headers.
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "XXXXXXXXXXXXXX");                        
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", key);                        
             
             // Request parameters. A third optional parameter is "details".
             string requestParameters = "detectionModel=detection_01&recognitionModel=recognition_03";
@@ -299,6 +299,44 @@ namespace face_quickstart
                 }
        
         }
+   
+        //crea person group, in input da utente id del personGroup
+        public static void createPersonGroup(string personGroup){
+            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/"+personGroup+"?recognitionModel=recognition_03");
+            
+            var postData =  "{\"name\": \"nome\",\"userData\":\"gruppo\",\"recognitionModel\":\"recognition_03\"}";
+            var data = Encoding.UTF8.GetBytes(postData);
+
+
+            request.Method = "PUT";
+            request.ContentType = "application/json";
+            request.ContentLength = data.Length;
+            request.Headers.Add("Ocp-Apim-Subscription-Key", key);
+            request.Host = "provaFaccia.cognitiveservices.azure.com";
+
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(data, 0, data.Length);
+            }
+
+            var response = (HttpWebResponse)request.GetResponse();
+            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            dynamic json  = JsonConvert.DeserializeObject(responseString);
+		    
+            Console.WriteLine("GEISON: "+json);            
+
+        }
+
+        public static void trainPersonGroup(string personGroupId){
+        
+            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/"+personGroupId+"/train?recognitionModel=recognition_03");
+            request.Method = "POST";
+            request.Headers.Add("Ocp-Apim-Subscription-Key", key);
+            request.Host = "provaFaccia.cognitiveservices.azure.com";
+
+            var response = (HttpWebResponse)request.GetResponse();
+        }
+
      
     }
     
