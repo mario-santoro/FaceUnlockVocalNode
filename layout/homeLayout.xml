@@ -13,7 +13,7 @@
         android:padding="5dp"
     />
     <ListView 
-        
+         IsPullToRefreshEnabled="true"
         android:choiceMode="singleChoice"
         android:id="@+id/List"
         android:layout_width="fill_parent"
