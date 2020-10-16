@@ -20,10 +20,10 @@ namespace FaceUnlockVocalNode
         private static SqlConnectionStringBuilder connessione()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "<server>";
-            builder.UserID = "<username>";
-            builder.Password = "<password>";
-            builder.InitialCatalog = "<nomne-db>";
+            builder.DataSource = "server-faccia.database.windows.net";
+            builder.UserID = "annunziata";
+            builder.Password = "mario-94";
+            builder.InitialCatalog = "app";
 
             return builder;
         }
@@ -94,7 +94,7 @@ namespace FaceUnlockVocalNode
             }
 
         }
-        private Boolean controlloUtente(String username) {
+        public Boolean controlloUtente(String username) {
 
             SqlConnectionStringBuilder builder = connessione();
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -114,11 +114,11 @@ namespace FaceUnlockVocalNode
                         if (reader.Read())
                         {
                             Console.WriteLine("{0}", reader.GetString(0));
-                            return false;
+                            return true;
                         }
                         else
                         {
-                            return true;
+                            return false;
                         }
                     }
                 }
@@ -130,7 +130,7 @@ namespace FaceUnlockVocalNode
         public Boolean inserimentoUtente(String text, String pasw)
         {
 
-            if (controlloUtente(text))
+            if (!controlloUtente(text))
             {
 
 

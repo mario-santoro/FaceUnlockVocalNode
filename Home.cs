@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
+using static Android.Bluetooth.BluetoothClass;
+using static Android.Widget.AdapterView;
 
 namespace FaceUnlockVocalNode
 {
@@ -24,7 +26,7 @@ namespace FaceUnlockVocalNode
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.homeLayout); // loads the HomeScreen.axml as this activity's view
             listView = FindViewById<ListView>(Resource.Id.List); // get reference to the ListView in the layout
-
+           
              username = Intent.GetStringExtra("username");
 
             MySQL s = new MySQL();
@@ -32,10 +34,11 @@ namespace FaceUnlockVocalNode
            n = s.getNote(username);
             // populate the listview with data
             listView.Adapter = new CustomAdapter(this, n);
-           
 
-          
-            
+           /* if (!OnBackButtonPressed()) {
+                Toast.MakeText(Application.Context, "Stampa: titolo ", ToastLength.Long).Show();
+              
+            }*/
             // Create your application here
 
             Button b = (Button)FindViewById(Resource.Id.addNota);
@@ -58,5 +61,7 @@ namespace FaceUnlockVocalNode
 
         }
 
+
     }
+
 }

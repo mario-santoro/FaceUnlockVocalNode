@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-
+using Android;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -22,6 +22,15 @@ namespace FaceUnlockVocalNode
 
     public class Reg : Activity
     {
+        ImageView img;
+
+        readonly string[] permissionGroup =
+        {
+            Manifest.Permission.ReadExternalStorage,
+            Manifest.Permission.WriteExternalStorage,
+            Manifest.Permission.Camera
+        };
+
         EditText username;
         EditText password;
         string user;
@@ -38,7 +47,9 @@ namespace FaceUnlockVocalNode
 
         private void RegOnClick(object sender, EventArgs eventArgs)
         {
-
+            img = (ImageView)FindViewById(Resource.Id.frameImage);
+            Console.WriteLine(img);
+            Console.WriteLine(img);
             username = (EditText)FindViewById(Resource.Id.textUser);
             user = username.Text.ToString();
 
@@ -58,7 +69,7 @@ namespace FaceUnlockVocalNode
 
             }
             else {
-                Snackbar.Make(view, "Errore esiste già un utente con questa email: " + user, Snackbar.LengthLong)
+                Snackbar.Make(view, "Errore esiste già un utente con questo username: " + user, Snackbar.LengthLong)
                  .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
             }
            
