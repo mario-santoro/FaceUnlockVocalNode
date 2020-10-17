@@ -8,6 +8,8 @@ using Android;
 using Plugin.Media;
 using Android.Graphics;
 using Android.Views;
+using Android.Support.Design.Widget;
+
 
 namespace FaceUnlockVocalNode
 {
@@ -24,7 +26,9 @@ namespace FaceUnlockVocalNode
             Manifest.Permission.Camera
         };
 
-      
+        EditText username;
+        string user;
+        string path;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -35,16 +39,64 @@ namespace FaceUnlockVocalNode
             RequestPermissions(permissionGroup, 0);
 
             img = (ImageView)FindViewById(Resource.Id.frameImage);
-            
+           
             ButtonLogin = (Button)FindViewById(Resource.Id.ButtonLogin);
-
-            ButtonLogin.Click += CamptureButton_Click;
+            ButtonLogin.Click += LogOnClick;
+            img.Click += CamptureButton_Click;
             Button b1 = (Button)FindViewById(Resource.Id.Credenziali);
-            b1.Click += LogOnClick;
+            b1.Click += LogconCred;
             
         }
-
         private void LogOnClick(object sender, EventArgs eventArgs)
+        {
+           
+           
+           
+            username = (EditText)FindViewById(Resource.Id.textUser);
+            user = username.Text.ToString();
+
+          
+         
+            MySQL m = new MySQL();
+
+            Boolean flag= m.controlloUtente(user);
+
+             View view = (View)sender;
+            if (flag)
+            {             
+                var id= FaceUnlockVocalNode.Resources.MyCognitive.Detect(path);
+                string idP = FaceUnlockVocalNode.Resources.MyCognitive.identify(id);
+                if (idP!="") {
+                    if (m.getPersonID(user, idP))
+                    {
+                        Intent openPage1 = new Intent(this, typeof(Home));
+                        openPage1.PutExtra("username", user);
+                        StartActivity(openPage1);
+
+                    }
+                    else {
+                        Snackbar.Make(view, "Errore mismatch tra foto e username: ", Snackbar.LengthLong)
+                   .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+
+                    }
+                   
+
+                }
+                else
+                {
+                    Snackbar.Make(view, "Errore riconoscimento: ", Snackbar.LengthLong)
+                     .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+                }
+            }
+            else
+            {
+                Snackbar.Make(view, "Errore non esiste un utente con questo username: " + user, Snackbar.LengthLong)
+                 .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+            }
+
+
+        }
+        private void LogconCred(object sender, EventArgs eventArgs)
         {
 
             Intent openPage1 = new Intent(this, typeof(LoginCredenziali));
@@ -62,7 +114,7 @@ namespace FaceUnlockVocalNode
            // img.Visibility = ViewStates.Visible;
         }
 
-
+       
         async void TakePhoto()
         {
             await CrossMedia.Current.Initialize();
@@ -78,6 +130,7 @@ namespace FaceUnlockVocalNode
             if (file == null) { return; }
             byte[] imageArray = System.IO.File.ReadAllBytes(file.Path);
             Bitmap b = BitmapFactory.DecodeByteArray(imageArray, 0, imageArray.Length);
+            path= file.Path.ToString();
             img.SetImageBitmap(b);
         }
 

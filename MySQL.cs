@@ -20,10 +20,10 @@ namespace FaceUnlockVocalNode
         private static SqlConnectionStringBuilder connessione()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "<server>";
-            builder.UserID = "<username>";
-            builder.Password = "<password>";
-            builder.InitialCatalog = "<nomne-db>";
+            builder.DataSource = "server-faccia.database.windows.net";
+            builder.UserID = "annunziata";
+            builder.Password = "mario-94";
+            builder.InitialCatalog = "app";
 
             return builder;
         }
@@ -94,13 +94,57 @@ namespace FaceUnlockVocalNode
             }
 
         }
-        private Boolean controlloUtente(String username) {
+
+        public Boolean getPersonID(String username, String id)
+        {
 
             SqlConnectionStringBuilder builder = connessione();
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
             {
                 connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("SELECT personID From utente where username= '" + username + "';");
+
+                String sql = sb.ToString();
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Console.WriteLine("{0}", reader.GetString(0));
+                            if (reader.GetString(0) == id)
+                            {
+                                return true;
+                            }
+                            else {
+                                return false;
+                            }
+                        
+                        }
+                        else {
+                            return false;
+                        }
+                        
+                    }
+                }
+
+            }
+
+        }
+
+
+        public Boolean controlloUtente(String username) {
+
+            SqlConnectionStringBuilder builder = connessione();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+
+            {
+                connection.Open();
+               
                 StringBuilder sb = new StringBuilder();
                 sb.Append("SELECT * From utente where username= '" + username + "';");
 
@@ -114,11 +158,11 @@ namespace FaceUnlockVocalNode
                         if (reader.Read())
                         {
                             Console.WriteLine("{0}", reader.GetString(0));
-                            return false;
+                            return true;
                         }
                         else
                         {
-                            return true;
+                            return false;
                         }
                     }
                 }
@@ -127,10 +171,52 @@ namespace FaceUnlockVocalNode
 
         }
 
+        public Boolean inserimentoPersonID(String username, String personID)
+        {
+
+            if (!controlloUtente(username))
+            {
+
+
+                SqlConnectionStringBuilder builder = connessione();
+
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+
+                {
+                    connection.Open();
+                    SqlParameter parameter;
+
+                    using (var command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = DT.CommandType.Text;
+                        command.CommandText = @"UPDATE utente SET personID = @personID WHERE username=@username ";
+
+
+                        parameter = new SqlParameter("@personID", DT.SqlDbType.NVarChar, 40);
+                        parameter.Value = personID;
+                        command.Parameters.Add(parameter);
+
+                        parameter = new SqlParameter("@username", DT.SqlDbType.NVarChar, 50);
+                        parameter.Value = username;
+                        command.Parameters.Add(parameter);
+                        command.ExecuteNonQuery();
+
+                        return true;
+                    }
+                }
+            }
+            else {
+                return false;
+            }
+        }
+
+
         public Boolean inserimentoUtente(String text, String pasw)
         {
 
-            if (controlloUtente(text))
+            if (!controlloUtente(text))
             {
 
 
@@ -173,10 +259,13 @@ namespace FaceUnlockVocalNode
                     }
                 }
             }
-            else {
+            else
+            {
                 return false;
             }
         }
+
+
 
         public void inserimentoNota(String username, Note n)
         {

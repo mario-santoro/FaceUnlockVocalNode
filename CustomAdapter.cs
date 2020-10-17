@@ -64,6 +64,7 @@ namespace FaceUnlockVocalNode
                 openPage1.PutExtra("username", item.getUsername());
                 context.StartActivity(openPage1);
             };
+            /*
             view.FindViewById<TextView>(Resource.Id.titoloNota).Click += (sender, args) =>
             {
                 Intent openPage1 = new Intent(context, typeof(ModificaNota));
@@ -74,7 +75,7 @@ namespace FaceUnlockVocalNode
                 openPage1.PutExtra("contenuto", item.getContenuto());
                 context.StartActivity(openPage1);
             };
-
+            */
             view.FindViewById<TextView>(Resource.Id.dataNota).Click += (sender, args) =>
             {
                 Intent openPage1 = new Intent(context, typeof(ModificaNota));
@@ -118,7 +119,7 @@ namespace FaceUnlockVocalNode
 
             return view;
         }
-        
+        /*
         private void modificaNota(object sender, EventArgs e)
         {
 
@@ -134,7 +135,7 @@ namespace FaceUnlockVocalNode
 
 
         }
-
+        */
         /*
         private void cancellaNota(object sender, EventArgs e)
         {
@@ -149,6 +150,6 @@ namespace FaceUnlockVocalNode
 
         }
       */
-
+       
     }
 }
