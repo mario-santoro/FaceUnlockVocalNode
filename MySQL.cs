@@ -94,6 +94,50 @@ namespace FaceUnlockVocalNode
             }
 
         }
+        //controllo che il PersonID sia dell'utente
+        public Boolean getPersonID(String username, String id)
+        {
+
+            SqlConnectionStringBuilder builder = connessione();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("SELECT personID From utente where username= '" + username + "';");
+
+                String sql = sb.ToString();
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Console.WriteLine("{0}", reader.GetString(0));
+                            Console.WriteLine("Eccolooo "+ reader.GetString(0)+" : "+id);
+                            if (reader.GetString(0) == id)
+                            {
+                                return true;
+                            }
+                            else {
+                                return false;
+                            }
+                        
+                        }
+                        else {
+                            return false;
+                        }
+                        
+                    }
+                }
+
+            }
+
+        }
+
+        //controllo che esista l'utente username
         public Boolean controlloUtente(String username) {
 
             SqlConnectionStringBuilder builder = connessione();
@@ -101,6 +145,7 @@ namespace FaceUnlockVocalNode
 
             {
                 connection.Open();
+               
                 StringBuilder sb = new StringBuilder();
                 sb.Append("SELECT * From utente where username= '" + username + "';");
 
@@ -126,6 +171,41 @@ namespace FaceUnlockVocalNode
             }
 
         }
+
+        //inserimento del PersonId nel database
+        public Boolean inserimentoPersonID(String username, String personID)
+        {
+                SqlConnectionStringBuilder builder = connessione();
+
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+
+                {
+                    connection.Open();
+                    SqlParameter parameter;
+
+                    using (var command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = DT.CommandType.Text;
+                        command.CommandText = @"UPDATE utente SET personID = @personID WHERE username=@username ";
+
+
+                        parameter = new SqlParameter("@personID", DT.SqlDbType.NVarChar, 40);
+                        parameter.Value = personID;
+                        command.Parameters.Add(parameter);
+
+                        parameter = new SqlParameter("@username", DT.SqlDbType.NVarChar, 50);
+                        parameter.Value = username;
+                        command.Parameters.Add(parameter);
+                        command.ExecuteNonQuery();
+                    return true;
+                        
+                    }
+                }
+           
+        }
+
 
         public Boolean inserimentoUtente(String text, String pasw)
         {
@@ -173,10 +253,13 @@ namespace FaceUnlockVocalNode
                     }
                 }
             }
-            else {
+            else
+            {
                 return false;
             }
         }
+
+
 
         public void inserimentoNota(String username, Note n)
         {

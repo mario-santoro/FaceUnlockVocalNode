@@ -26,49 +26,38 @@ namespace FaceUnlockVocalNode.Resources
 {
     class MyCognitive
     {
-        static string id = null;
+        
         static string key = "73185574f3d74f51aebe5262d6f31445";
         // Gets the analysis of the specified image by using the Face REST API.
-       public static async Task Detect(string imageFilePath)
+       public static string Detect(string imageFilePath)
         {
-           
-            HttpClient client = new HttpClient();
 
-            // Request headers.
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", key);
 
-            // Request parameters. A third optional parameter is "details".
-            string requestParameters = "returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_03&returnRecognitionModel=false&detectionModel=detection_01";
-
-            // Assemble the URI for the REST API Call.
-            string uri = "https://provaFaccia.cognitiveservices.azure.com/face/v1.0/detect?" + requestParameters;
-            //Console.WriteLine(uri);
-            HttpResponseMessage response;
-
+            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_03&returnRecognitionModel=false&detectionModel=detection_01");
             // Request body. Posts a locally stored JPEG image.
+
+
             byte[] byteData = GetImageAsByteArray(imageFilePath);
-          
-            using (ByteArrayContent content = new ByteArrayContent(byteData))
+
+
+            request.Method = "POST";
+            request.ContentType = "application/octet-stream";
+            request.ContentLength = byteData.Length;
+            request.Headers.Add("Ocp-Apim-Subscription-Key", key);
+            request.Host = "provaFaccia.cognitiveservices.azure.com";
+
+            using (var stream = request.GetRequestStream())
             {
-                // This example uses content type "application/octet-stream".
-                // The other content types you can use are "application/json"
-                // and "multipart/form-data".
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");    
-                 response = await client.PostAsync(uri, content);
+                stream.Write(byteData, 0, byteData.Length);
             }
-            // Execute the REST API call.
-           
 
-            // Get the JSON response.
-            string contentString = await response.Content.ReadAsStringAsync();
+            var response = (HttpWebResponse)request.GetResponse();
+            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            Console.WriteLine("Risultati: " + responseString);
+            dynamic json = JsonConvert.DeserializeObject(responseString);
 
-            // Display the JSON response.
-            Console.WriteLine("\nResponse:\n");
-            dynamic json = JsonConvert.DeserializeObject(contentString);
-
-            id = json[0].faceId;
-
-            Console.WriteLine("CIAOOOOOOOOOOO");
+            var id = json[0].faceId;
+            return id ;
         }
 
 
@@ -81,9 +70,9 @@ namespace FaceUnlockVocalNode.Resources
                 return binaryReader.ReadBytes((int)fileStream.Length);
             }
         }
-       
-       
-        public static void identify(String img)
+
+
+        public static string identify(String img)
         {
 
             var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/identify?recognitionModel=recognition_03");
@@ -104,8 +93,27 @@ namespace FaceUnlockVocalNode.Resources
 
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            Console.WriteLine("Risultati: " + responseString);
+
+            dynamic json = JsonConvert.DeserializeObject(responseString);            
+            string b = String.Join(" ", json[0].candidates);
+         
+            if (b != "")
+            {
+               
+                int c = (int)json[0].candidates[0].confidence;
+                if (c > 0.75)
+                {
+                    return json[0].candidates[0].personId;
+                }
+                else
+                {
+                    return "";
+                }
+            } else {
+                return "";
+            }
         }
+
 
         public static string addPerson(string nome, string userData)
         {
@@ -136,37 +144,31 @@ namespace FaceUnlockVocalNode.Resources
 
 
         //aggiungere faccia al persongroup person
-        static async Task addFace(string personId, string pathImage)
+        public static void addFace(string personId, string pathImage)
         {
-            HttpClient client = new HttpClient();
-            // Request headers.
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", key);
 
-            // Request parameters. A third optional parameter is "details".
-            string requestParameters = "detectionModel=detection_01&recognitionModel=recognition_03";
-
-            // Assemble the URI for the REST API Call.
-            string uri = "https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/2/persons/" + personId + "/persistedFaces?" + requestParameters;
-            //Console.WriteLine(uri);
-            HttpResponseMessage response;
-
+            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/2/persons/" + personId + "/persistedFaces?detectionModel=detection_01&recognitionModel=recognition_03");
             // Request body. Posts a locally stored JPEG image.
+
+
             byte[] byteData = GetImageAsByteArray(pathImage);
 
-            using (ByteArrayContent content = new ByteArrayContent(byteData))
+
+            request.Method = "POST";
+            request.ContentType = "application/octet-stream";
+            request.ContentLength = byteData.Length;
+            request.Headers.Add("Ocp-Apim-Subscription-Key", key);
+            request.Host = "provaFaccia.cognitiveservices.azure.com";
+
+            using (var stream = request.GetRequestStream())
             {
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                // Execute the REST API call.
-                response = await client.PostAsync(uri, content);
-
-                // Get the JSON response.
-                string contentString = await response.Content.ReadAsStringAsync();
-
-                // Display the JSON response.
-                Console.WriteLine("\nResponse:\n");
-
-                Console.WriteLine(contentString);
+                stream.Write(byteData, 0, byteData.Length);
             }
+
+            var response = (HttpWebResponse)request.GetResponse();
+            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            Console.WriteLine("Risultati: " + responseString);
+
 
         }
 
@@ -194,7 +196,7 @@ namespace FaceUnlockVocalNode.Resources
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             dynamic json = JsonConvert.DeserializeObject(responseString);
 
-            Console.WriteLine("GEISON: " + json);
+          
 
         }
 
@@ -202,11 +204,23 @@ namespace FaceUnlockVocalNode.Resources
         {
 
             var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/" + personGroupId + "/train?recognitionModel=recognition_03");
+
+            var postData = "";
+            var data = Encoding.UTF8.GetBytes(postData);
+
             request.Method = "POST";
-            request.Headers.Add("Ocp-Apim-Subscription-Key", key);
+            request.ContentType = "application/json";
+            request.ContentLength = data.Length;
+            request.Headers.Add("Ocp-Apim-Subscription-Key", "73185574f3d74f51aebe5262d6f31445");
             request.Host = "provaFaccia.cognitiveservices.azure.com";
 
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(data, 0, data.Length);
+            }
+
             var response = (HttpWebResponse)request.GetResponse();
+
         }
 
 

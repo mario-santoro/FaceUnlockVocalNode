@@ -49,7 +49,7 @@ namespace FaceUnlockVocalNode
         }
         private void LogOnClick(object sender, EventArgs eventArgs)
         {
-            img = (ImageView)FindViewById(Resource.Id.frameImage);
+           
            
            
             username = (EditText)FindViewById(Resource.Id.textUser);
@@ -62,16 +62,31 @@ namespace FaceUnlockVocalNode
             Boolean flag= m.controlloUtente(user);
 
              View view = (View)sender;
-            if (flag)
-            {
-                //  string id = null;
-                Console.WriteLine("CIAOOOOOOOOOOO" + path);
-                FaceUnlockVocalNode.Resources.MyCognitive.Detect(path).Wait();
-               
-                Intent openPage1 = new Intent(this, typeof(Home));
-                openPage1.PutExtra("username", user);
-                StartActivity(openPage1);
+            if (flag) //se esiste un utente con questo username
+            {             
+                var id= FaceUnlockVocalNode.Resources.MyCognitive.Detect(path);
+                string idP = FaceUnlockVocalNode.Resources.MyCognitive.identify(id);              
+                if (idP!="") { //se esiste un utente con questa faccia avrà un id diverso da stringa vuota
+                    if (m.getPersonID(user, idP)) //e quell'id deve appartenere a quell'username
+                    {
+                        Intent openPage1 = new Intent(this, typeof(Home));
+                        openPage1.PutExtra("username", user);
+                        StartActivity(openPage1);
 
+                    }
+                    else {
+                        Snackbar.Make(view, "Errore mismatch tra foto e username: ", Snackbar.LengthLong)
+                   .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+
+                    }
+                   
+
+                }
+                else
+                {
+                    Snackbar.Make(view, "Errore riconoscimento: ", Snackbar.LengthLong)
+                     .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+                }
             }
             else
             {
