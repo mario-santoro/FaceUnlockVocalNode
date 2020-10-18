@@ -12,6 +12,16 @@
         android:textStyle="bold"
         android:padding="5dp"
     />
+     <TextView android:id="@+id/benvenuto"
+        android:text=""
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textSize="20dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold"
+        android:padding="5dp"
+    />
     <ListView 
          IsPullToRefreshEnabled="true"
         android:choiceMode="singleChoice"
