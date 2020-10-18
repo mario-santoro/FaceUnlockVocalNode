@@ -64,7 +64,7 @@ namespace FaceUnlockVocalNode
             }
             else
             {
-                Snackbar.Make(view, "Errore non esiste un utente con questa email: " + user, Snackbar.LengthLong)
+                Snackbar.Make(view, "Errore credenziali errate", Snackbar.LengthLong)
                  .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
             }
         

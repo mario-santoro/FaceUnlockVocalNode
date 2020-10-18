@@ -28,12 +28,13 @@ namespace FaceUnlockVocalNode.Resources
     {
         
         static string key = "73185574f3d74f51aebe5262d6f31445";
+        static string keyOCR = "72679f75510b4871b84b57977d217e13";
         // Gets the analysis of the specified image by using the Face REST API.
-       public static string Detect(string imageFilePath)
+        public static string Detect(string imageFilePath, string[] emozioneMassima, int[] numFrase)
         {
 
 
-            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_03&returnRecognitionModel=false&detectionModel=detection_01");
+            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/detect?returnFaceId=true&returnFaceAttributes=emotion&returnFaceLandmarks=false&recognitionModel=recognition_03&returnRecognitionModel=false&detectionModel=detection_01");
             // Request body. Posts a locally stored JPEG image.
 
 
@@ -55,7 +56,20 @@ namespace FaceUnlockVocalNode.Resources
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             Console.WriteLine("Risultati: " + responseString);
             dynamic json = JsonConvert.DeserializeObject(responseString);
-
+            double[] valoreEmozioni = { (double)json[0].faceAttributes.emotion.anger, (double)json[0].faceAttributes.emotion.contempt, (double)json[0].faceAttributes.emotion.disgust, (double)json[0].faceAttributes.emotion.fear, (double)json[0].faceAttributes.emotion.happiness, (double)json[0].faceAttributes.emotion.neutral, (double)json[0].faceAttributes.emotion.sadness, (double)json[0].faceAttributes.emotion.surprise };
+            string[] emotion = { "anger", "contempt", "disgust", "fear", "happines", "neutral", "sadness", "surprise" };
+            emozioneMassima[0] = emotion[0];
+            double max = valoreEmozioni[0];
+            numFrase[0] = 0;
+            for (int i = 1; i < 8; i++)
+            {
+                if (valoreEmozioni[i] > max)
+                {
+                    max = valoreEmozioni[i];
+                    emozioneMassima[0] = emotion[i];
+                    numFrase[0] = i;
+                }
+            }
             var id = json[0].faceId;
             return id ;
         }
@@ -221,6 +235,44 @@ namespace FaceUnlockVocalNode.Resources
 
             var response = (HttpWebResponse)request.GetResponse();
 
+        }
+
+        static void getText(string imageFilePath)
+        {
+
+            var request = (HttpWebRequest)WebRequest.Create("https://faceunlockocr.cognitiveservices.azure.com/vision/v3.1/ocr?language=it&detectOrientation=true");
+            // Request body. Posts a locally stored JPEG image.
+
+
+            byte[] byteData = GetImageAsByteArray(imageFilePath);
+
+
+            request.Method = "POST";
+            request.ContentType = "application/octet-stream";
+            request.ContentLength = byteData.Length;
+            request.Headers.Add("Ocp-Apim-Subscription-Key", keyOCR);
+            request.Host = "faceunlockocr.cognitiveservices.azure.com";
+
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(byteData, 0, byteData.Length);
+            }
+
+            var response = (HttpWebResponse)request.GetResponse();
+            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            Console.WriteLine("Risultati: " + responseString);
+            dynamic json = JsonConvert.DeserializeObject(responseString);
+            string testo = "";
+            for (int i = 0; i < json.regions[0].lines.Count; i++)
+            {
+                for (int j = 0; j < json.regions[0].lines[i].words.Count; j++)
+                {
+                    testo += json.regions[0].lines[i].words[j].text + " ";
+
+                }
+            }
+
+            Console.WriteLine("Risultato finale tombale:" + testo);
         }
 
 

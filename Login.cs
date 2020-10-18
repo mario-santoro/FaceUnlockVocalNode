@@ -63,14 +63,19 @@ namespace FaceUnlockVocalNode
 
              View view = (View)sender;
             if (flag) //se esiste un utente con questo username
-            {             
-                var id= FaceUnlockVocalNode.Resources.MyCognitive.Detect(path);
+            {
+                string[] emozione = { "" };
+                int[] numFrase = new int[1];
+                var id= FaceUnlockVocalNode.Resources.MyCognitive.Detect(path, emozione, numFrase);
                 string idP = FaceUnlockVocalNode.Resources.MyCognitive.identify(id);              
                 if (idP!="") { //se esiste un utente con questa faccia avrà un id diverso da stringa vuota
                     if (m.getPersonID(user, idP)) //e quell'id deve appartenere a quell'username
                     {
                         Intent openPage1 = new Intent(this, typeof(Home));
                         openPage1.PutExtra("username", user);
+                        openPage1.PutExtra("emozione", emozione[0]);
+
+                        openPage1.PutExtra("numFrase", numFrase[0]);
                         StartActivity(openPage1);
 
                     }
