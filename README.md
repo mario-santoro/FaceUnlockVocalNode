@@ -1,4 +1,4 @@
-# FaceUnlockVocalNote
+# RecognitionNote
 
 <img align="center" height="204" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/immagini/icona cloud.png" >
 
