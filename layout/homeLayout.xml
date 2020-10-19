@@ -12,6 +12,15 @@
         android:textStyle="bold"
         android:padding="5dp"
     />
+      <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+            android:text="Logout"
+        style="?android:attr/borderlessButtonStyle"
+        android:textSize="12dp"/>
+    
      <TextView android:id="@+id/benvenuto"
         android:text=""
         android:layout_width="fill_parent"
