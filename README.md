@@ -5,7 +5,7 @@
 Questa è un app Android sviluppata per l'esame di laurea magistrale informatica curriculum Cloud Computing dell'Università degli Studi di Salerno.
 Ha come scopo quello di utilizzare i servizi offerti da Microsoft Azure. 
 
-## Descrizione:
+## Descrizione
 L’utente si ritrova inizialmente in una pagina dove deve decidere tra registrazione e login. Essendo il primo accesso decide di registrarsi, inserendo un username (univoco) una password e una foto istantanea che servirà per il suo riconoscimento facciale per i prossimi accessi. Completata la procedura si ritroverà nella HomePage dell’app.
 Effettuando successivamente il login può scegliere se effettuare l’accesso in modo classico (username e password) oppure con username e riconoscimento facciale. Utilizzando quest’ultimo all’accesso nella HomePage un messaggio di benvenuto verrà visualizzato a seconda dell’emozione riconosciuta nella foto (8 tipi diversi di emozioni percepite). 
 Il servizio in sé permette all’utente di tener traccia di note testuali (inserimento, cancellazione e modifica) con la possibilità di scattare una foto a del testo o un immagine contenente testo e poi il servizio cognitivo riconosce il testo in essa contenuta e in maniera automatica inserisce il testo riconosciuto nel contenuto della nota, pronta per essere salvata o modificata.
@@ -25,4 +25,3 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 ## Installazione di pacchetti NuGet
 - System.Data.SqlClient
 - Cognitive services: Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
-- System.Text.Json
