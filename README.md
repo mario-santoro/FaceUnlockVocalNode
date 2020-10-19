@@ -11,13 +11,15 @@ Effettuando successivamente il login può scegliere se effettuare l’accesso in
 Il servizio in sé permette all’utente di tener traccia di note testuali (inserimento, cancellazione e modifica) con la possibilità di scattare una foto a del testo o un immagine contenente testo e poi il servizio cognitivo riconosce il testo in essa contenuta e in maniera automatica inserisce il testo riconosciuto nel contenuto della nota, pronta per essere salvata o modificata.
 
 ## Architettura
-
+<img align="center" height="204" src="https://github.com/mario-santoro/RecognitionNote/blob/master/immagini/architettura.jpg?raw=true" >
 ## Componenti di Microsoft Azure utilizzate: 
-•	Database SQL: per memorizzare in maniera persistente i dati anagrafici e di accesso dell’utente e le note testuali.
-•	l'API Visione artificiale in Servizi cognitivi di Azure:  
-	- Face - Analizza i visi umani in un'immagine, utilizzato per effettuare il login.
-	- Vision: OCR e Lettura - estrazione di testo (riconoscimento ottico dei caratteri) per estrarre testo stampato e scritto a mano da immagini e creare le note testuali.
-
+ <ul>
+	<li>Database SQL: per memorizzare in maniera persistente i dati anagrafici e di accesso dell’utente e le note testuali.</li>
+	<li>l'API Visione artificiale in Servizi cognitivi di Azure: 
+	<ul>
+		<li>Face - Analizza i visi umani in un'immagine, utilizzato per effettuare il login.</li>
+	<li>Vision: OCR e Lettura - estrazione di testo (riconoscimento ottico dei caratteri) per estrarre testo stampato e scritto a mano da immagini e creare le note testuali.</li> </ul>
+</ul>
 
 ## Installazione di pacchetti NuGet
 - System.Data.SqlClient
