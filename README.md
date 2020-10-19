@@ -12,7 +12,8 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 
 ## Architettura
 <img align="center" height="204" src="https://github.com/mario-santoro/RecognitionNote/blob/master/immagini/architettura.jpg?raw=true" >
-## Componenti di Microsoft Azure utilizzate: 
+
+## Componenti di Microsoft Azure utilizzate 
  <ul>
 	<li>Database SQL: per memorizzare in maniera persistente i dati anagrafici e di accesso dell’utente e le note testuali.</li>
 	<li>l'API Visione artificiale in Servizi cognitivi di Azure: 
