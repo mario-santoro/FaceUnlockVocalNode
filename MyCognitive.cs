@@ -115,7 +115,7 @@ namespace FaceUnlockVocalNode.Resources
             {
                
                 int c = (int)json[0].candidates[0].confidence;
-                if (c > 0.75)
+                if (c > 0.65)
                 {
                     return json[0].candidates[0].personId;
                 }
@@ -237,7 +237,7 @@ namespace FaceUnlockVocalNode.Resources
 
         }
 
-        static void getText(string imageFilePath)
+        public static string getText(string imageFilePath)
         {
 
             var request = (HttpWebRequest)WebRequest.Create("https://faceunlockocr.cognitiveservices.azure.com/vision/v3.1/ocr?language=it&detectOrientation=true");
@@ -272,7 +272,7 @@ namespace FaceUnlockVocalNode.Resources
                 }
             }
 
-            Console.WriteLine("Risultato finale tombale:" + testo);
+           return testo;
         }
 
 

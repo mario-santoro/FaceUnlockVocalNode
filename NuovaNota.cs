@@ -9,20 +9,35 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Plugin.Media;
+using Android.Graphics;
+using Android;
 
 namespace FaceUnlockVocalNode
 {
     [Activity(Label = "NuovaNota")]
     public class NuovaNota : Activity
     {
+
+        Button img;
+     
+        readonly string[] permissionGroup =
+        {
+            Manifest.Permission.ReadExternalStorage,
+            Manifest.Permission.WriteExternalStorage,
+            Manifest.Permission.Camera
+        };
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.nuovaNotaLayout);
             // Create your application here
-
+ 
             Button b = (Button)FindViewById(Resource.Id.Salva);
             b.Click += NuovaNotaOnClick;
+
+            img = (Button)FindViewById(Resource.Id.foto);
+            img.Click += CamptureButton_Click;
             // Create your application here
         }
 
@@ -54,6 +69,40 @@ namespace FaceUnlockVocalNode
 
 
         }
+
+
+        public void CamptureButton_Click(object sender, System.EventArgs eventArgs)
+        {
+            TakePhoto();
+            // img.Visibility = ViewStates.Visible;
+        }
+
+
+        async void TakePhoto()
+        {
+            await CrossMedia.Current.Initialize();
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
+                CompressionQuality = 40,
+                Name = "img.jpg",
+                Directory = "sample"
+            });
+
+            if (file == null) { return; }
+            byte[] imageArray = System.IO.File.ReadAllBytes(file.Path);
+            Bitmap b = BitmapFactory.DecodeByteArray(imageArray, 0, imageArray.Length);
+            String path = file.Path.ToString();
+            // img.SetImageBitmap(b);
+
+            String testo = FaceUnlockVocalNode.Resources.MyCognitive.getText(path);
+    
+            EditText contenuto = (EditText)FindViewById(Resource.Id.contenuto);
+            contenuto.Text +=testo;
+
+        }
+
 
     }
 }

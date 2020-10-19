@@ -35,6 +35,7 @@ namespace FaceUnlockVocalNode
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.homeLayout); // loads the HomeScreen.axml as this activity's view
+           
             listView = FindViewById<ListView>(Resource.Id.List); // get reference to the ListView in the layout
             textV = FindViewById<TextView>(Resource.Id.benvenuto);
           
@@ -59,21 +60,31 @@ namespace FaceUnlockVocalNode
             // populate the listview with data
             listView.Adapter = new CustomAdapter(this, n);
 
-           /* if (!OnBackButtonPressed()) {
-                Toast.MakeText(Application.Context, "Stampa: titolo ", ToastLength.Long).Show();
-              
-            }*/
-            // Create your application here
-
+         
             Button b = (Button)FindViewById(Resource.Id.addNota);
             b.Click += noteOnClick;
 
-            /*
-            Button canc = (Button)FindViewById(Resource.Id.elimina);
-            canc.Click += eliminaOnClick;*/
+            Button logOut = (Button)FindViewById(Resource.Id.logout);
+            logOut.Click += Logout;
+
         }
 
-        
+        public override bool OnKeyDown(Keycode keyCode, KeyEvent e)
+        {
+            switch (keyCode)
+            {
+                // in smartphone
+                case Keycode.Back:
+                    Intent openPage1 = new Intent(this, typeof(Home));
+                    String username = Intent.GetStringExtra("username");
+                    openPage1.PutExtra("username", username);
+                    StartActivity(openPage1);
+                    break;
+
+
+            }
+            return base.OnKeyDown(keyCode, e);
+        }
         private void noteOnClick(object sender, EventArgs eventArgs)
         {
             
@@ -83,6 +94,12 @@ namespace FaceUnlockVocalNode
                 StartActivity(openPage1);
 
 
+        }
+
+        private void Logout(object sender, EventArgs eventArgs)
+        {
+            Intent openPage1 = new Intent(this, typeof(MainActivity));   
+            StartActivity(openPage1);
         }
 
 

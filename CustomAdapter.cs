@@ -64,92 +64,23 @@ namespace FaceUnlockVocalNode
                 openPage1.PutExtra("username", item.getUsername());
                 context.StartActivity(openPage1);
             };
-            /*
-            view.FindViewById<TextView>(Resource.Id.titoloNota).Click += (sender, args) =>
+            
+            
+            view.Click += (sender, args) =>
             {
                 Intent openPage1 = new Intent(context, typeof(ModificaNota));
-                // Toast.MakeText(Application.Context, "Stampa: " + item.getId_nota() + "titolo " + item.getTitolo(), ToastLength.Long).Show();
+                // Toast.MakeText(Application.Context, "Stampa: " + item.getId_nota() , ToastLength.Long).Show();
                 openPage1.PutExtra("username", item.getUsername());
-                openPage1.PutExtra("id", item.getId_nota());
+
+                openPage1.PutExtra("id", "" + item.getId_nota());
                 openPage1.PutExtra("titolo", item.getTitolo());
                 openPage1.PutExtra("contenuto", item.getContenuto());
                 context.StartActivity(openPage1);
             };
-            */
-            view.FindViewById<TextView>(Resource.Id.dataNota).Click += (sender, args) =>
-            {
-                Intent openPage1 = new Intent(context, typeof(ModificaNota));
-               // Toast.MakeText(Application.Context, "Stampa: " + item.getId_nota() , ToastLength.Long).Show();
-                openPage1.PutExtra("username", item.getUsername());
-
-                openPage1.PutExtra("id", ""+item.getId_nota());
-                openPage1.PutExtra("titolo", item.getTitolo());
-                openPage1.PutExtra("contenuto", item.getContenuto());
-                context.StartActivity(openPage1);
-            };
-            /*
-
-            TextView d = (TextView)view.FindViewById<TextView>(Resource.Id.titoloNota);
-            d.Click += (sender, args) =>
-        {
-           // var t = items[po];
-
-            Intent openPage1 = new Intent(context, typeof(ModificaNota));
-             Toast.MakeText(Application.Context, "Stampa: " + item.getId_nota()+ "titolo "+ item.getTitolo(), ToastLength.Long).Show();
-            openPage1.PutExtra("username", item.getUsername());
-            openPage1.PutExtra("id", item.getId_nota());
-            openPage1.PutExtra("titolo", item.getTitolo());
-            openPage1.PutExtra("contenuto", item.getContenuto());
-            //context.StartActivity(openPage1);
-        };
-            TextView t = (TextView)view.FindViewById<TextView>(Resource.Id.dataNota);
-            t.Click += (sender, args) =>
-            {
-                // var t = items[po];
-
-                Intent openPage1 = new Intent(context, typeof(ModificaNota));
-                Toast.MakeText(Application.Context, "Stampa: " + item.getId_nota() + "titolo " + item.getTitolo(), ToastLength.Long).Show();
-                openPage1.PutExtra("username", item.getUsername());
-                openPage1.PutExtra("id", item.getId_nota());
-                openPage1.PutExtra("titolo", item.getTitolo());
-                openPage1.PutExtra("contenuto", item.getContenuto());
-               // context.StartActivity(openPage1);
-            }; 
-            */
 
             return view;
         }
-        /*
-        private void modificaNota(object sender, EventArgs e)
-        {
-
-            Toast.MakeText(Application.Context, "Stampa: " + item2.getId_nota()+ "titolo "+ item2.getTitolo(), ToastLength.Long).Show();
-            Intent openPage1 = new Intent(context, typeof(ModificaNota));
-
-            openPage1.PutExtra("username", item2.getUsername());
-            openPage1.PutExtra("id", item2.getId_nota());
-            openPage1.PutExtra("titolo", item2.getTitolo());
-            openPage1.PutExtra("contenuto", item2.getContenuto());
-
-            //context.StartActivity(openPage1);
-
-
-        }
-        */
-        /*
-        private void cancellaNota(object sender, EventArgs e)
-        {
-
-            MySQL s = new MySQL();
-             var t = items[po];
-            s.deleteNota(t.getId_nota());
-            Intent openPage1 = new Intent(context, typeof(Home));
-            openPage1.PutExtra("username", t.getUsername());
-            context.StartActivity(openPage1);
-          
-
-        }
-      */
+        
        
     }
 }

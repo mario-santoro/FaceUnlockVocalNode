@@ -17,6 +17,7 @@ namespace FaceUnlockVocalNode
 {
     class MySQL
     {
+       
         private static SqlConnectionStringBuilder connessione()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -28,39 +29,7 @@ namespace FaceUnlockVocalNode
             return builder;
         }
 
-        private int maxNota()
-        {
-            SqlConnectionStringBuilder builder = connessione();
-            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-
-            {
-                connection.Open();
-                StringBuilder sb = new StringBuilder();
-                sb.Append("SELECT MAX(id_nota) From nota;");
-
-                String sql = sb.ToString();
-
-                using (SqlCommand command = new SqlCommand(sql, connection))
-                {
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            Console.WriteLine("{0}", reader.GetValue(0));
-                            return Convert.ToInt32(reader.GetValue(0));
-                        }
-                        else
-                        {
-                            return 0;
-                        }
-
-                    }
-                }
-
-            }
-
-        }
+        
         public Boolean loginUtente(String username, String password)
         {
 
@@ -115,8 +84,7 @@ namespace FaceUnlockVocalNode
                     {
                         if (reader.Read())
                         {
-                            Console.WriteLine("{0}", reader.GetString(0));
-                            Console.WriteLine("Eccolooo "+ reader.GetString(0)+" : "+id);
+                        
                             if (reader.GetString(0) == id)
                             {
                                 return true;
@@ -240,7 +208,7 @@ namespace FaceUnlockVocalNode
                                     ); ";
 
 
-                        parameter = new SqlParameter("@username", DT.SqlDbType.NVarChar, 50);
+                        parameter = new SqlParameter("@username", DT.SqlDbType.NVarChar, 20);
                         parameter.Value = text;
                         command.Parameters.Add(parameter);
 
@@ -259,7 +227,39 @@ namespace FaceUnlockVocalNode
             }
         }
 
+        private int maxNota()
+        {
+            SqlConnectionStringBuilder builder = connessione();
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("SELECT MAX(id_nota) From nota;");
+
+                String sql = sb.ToString();
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Console.WriteLine("{0}", reader.GetValue(0));
+                            return Convert.ToInt32(reader.GetValue(0));
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+
+                    }
+                }
+
+            }
+
+        }
 
         public void inserimentoNota(String username, Note n)
         {
@@ -294,11 +294,11 @@ namespace FaceUnlockVocalNode
                                     @username 
                                     ); ";
 
-                    parameter = new SqlParameter("@id_nota", DT.SqlDbType.NVarChar, 50);
-                    parameter.Value = maxNota() + 1;
+                    parameter = new SqlParameter("@id_nota", DT.SqlDbType.Int, 8);
+                    parameter.Value =maxNota()+1;                   
                     command.Parameters.Add(parameter);
 
-                    parameter = new SqlParameter("@titolo", DT.SqlDbType.NVarChar, 50);
+                    parameter = new SqlParameter("@titolo", DT.SqlDbType.NVarChar, 20);
                     parameter.Value = n.getTitolo();
                     command.Parameters.Add(parameter);
 
@@ -307,11 +307,11 @@ namespace FaceUnlockVocalNode
                     parameter.Value = n.getData();
                     command.Parameters.Add(parameter);
 
-                    parameter = new SqlParameter("@contenuto", DT.SqlDbType.NVarChar, 16);
+                    parameter = new SqlParameter("@contenuto", DT.SqlDbType.NVarChar, 200);
                     parameter.Value = n.getContenuto();
                     command.Parameters.Add(parameter);
 
-                    parameter = new SqlParameter("@username", DT.SqlDbType.NVarChar, 16);
+                    parameter = new SqlParameter("@username", DT.SqlDbType.NVarChar, 20);
                     parameter.Value = username;
                     command.Parameters.Add(parameter);
 
