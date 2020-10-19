@@ -4,9 +4,22 @@
 
 Questa è un app Android sviluppata per l'esame di laurea magistrale informatica curriculum Cloud Computing dell'Università degli Studi di Salerno.
 Ha come scopo quello di utilizzare i servizi offerti da Microsoft Azure. 
-Per lo sviluppo dell'applicazione Android usiamo il plugin Xamarin di Visual Studio, implementiamo un database SQL per immagazzinare le informazioni, riconoscimento di immagini per il login e riconoscimento vocale per scrivere le note.
 
-Installazione di pacchetti NuGet
+## Descrizione:
+L’utente si ritrova inizialmente in una pagina dove deve decidere tra registrazione e login. Essendo il primo accesso decide di registrarsi, inserendo un username (univoco) una password e una foto istantanea che servirà per il suo riconoscimento facciale per i prossimi accessi. Completata la procedura si ritroverà nella HomePage dell’app.
+Effettuando successivamente il login può scegliere se effettuare l’accesso in modo classico (username e password) oppure con username e riconoscimento facciale. Utilizzando quest’ultimo all’accesso nella HomePage un messaggio di benvenuto verrà visualizzato a seconda dell’emozione riconosciuta nella foto (8 tipi diversi di emozioni percepite). 
+Il servizio in sé permette all’utente di tener traccia di note testuali (inserimento, cancellazione e modifica) con la possibilità di scattare una foto a del testo o un immagine contenente testo e poi il servizio cognitivo riconosce il testo in essa contenuta e in maniera automatica inserisce il testo riconosciuto nel contenuto della nota, pronta per essere salvata o modificata.
+
+## Architettura
+
+## Componenti di Microsoft Azure utilizzate: 
+•	Database SQL: per memorizzare in maniera persistente i dati anagrafici e di accesso dell’utente e le note testuali.
+•	l'API Visione artificiale in Servizi cognitivi di Azure:  
+	- Face - Analizza i visi umani in un'immagine, utilizzato per effettuare il login.
+	- Vision: OCR e Lettura - estrazione di testo (riconoscimento ottico dei caratteri) per estrarre testo stampato e scritto a mano da immagini e creare le note testuali.
+
+
+## Installazione di pacchetti NuGet
 - System.Data.SqlClient
 - Cognitive services: Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
 - System.Text.Json
