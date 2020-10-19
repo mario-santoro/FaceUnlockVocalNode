@@ -11,7 +11,7 @@ Effettuando successivamente il login può scegliere se effettuare l’accesso in
 Il servizio in sé permette all’utente di tener traccia di note testuali (inserimento, cancellazione e modifica) con la possibilità di scattare una foto a del testo o un immagine contenente testo e poi il servizio cognitivo riconosce il testo in essa contenuta e in maniera automatica inserisce il testo riconosciuto nel contenuto della nota, pronta per essere salvata o modificata.
 
 ## Architettura
-<img align="center" height="204" src="https://github.com/mario-santoro/RecognitionNote/blob/master/immagini/architettura.jpg?raw=true" >
+<img align="center" height="250" src="https://github.com/mario-santoro/RecognitionNote/blob/master/immagini/architettura.jpg?raw=true" >
 
 ## Componenti di Microsoft Azure utilizzate 
  <ul>
