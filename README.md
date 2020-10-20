@@ -25,3 +25,21 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 ## Installazione di pacchetti NuGet
 - System.Data.SqlClient
 - Cognitive services: Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
+
+## Tabelle Database
+<b>create table utente</b>(
+   username Nvarchar(20) primary key,
+  passw Nvarchar(16) not null,
+  personID varchar(40)
+)
+
+<b>create table nota</b>(
+    id_nota int Primary key,
+    titolo Nvarchar(20) not null,
+    data_nota Nvarchar(50) not null,
+    contenuto Nvarchar(200) not null,
+    username Nvarchar(20) NOT NULL,
+     FOREIGN KEY (username) REFERENCES utente(username)
+     on Update cascade
+     on Delete cascade
+)
