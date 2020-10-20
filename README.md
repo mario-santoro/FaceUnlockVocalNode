@@ -28,18 +28,18 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 
 ## Tabelle Database
 <b>create table utente</b>(
-   username Nvarchar(20) primary key,
-  passw Nvarchar(16) not null,
-  personID varchar(40)
-)
-
+  <br> username Nvarchar(20) primary key,
+ <br> passw Nvarchar(16) not null,
+ <br>  personID varchar(40)
+<br>)
+<br>
 <b>create table nota</b>(
-    id_nota int Primary key,
-    titolo Nvarchar(20) not null,
-    data_nota Nvarchar(50) not null,
-    contenuto Nvarchar(200) not null,
-    username Nvarchar(20) NOT NULL,
-     FOREIGN KEY (username) REFERENCES utente(username)
-     on Update cascade
-     on Delete cascade
-)
+ <br>   id_nota int Primary key,
+  <br>  titolo Nvarchar(20) not null,
+    <br>data_nota Nvarchar(50) not null,
+    <br>contenuto Nvarchar(200) not null,
+    <br>username Nvarchar(20) NOT NULL,
+    <br> FOREIGN KEY (username) REFERENCES utente(username)
+     <br>on Update cascade
+     <br>on Delete cascade
+<br>)
