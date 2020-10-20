@@ -17,12 +17,14 @@ namespace FaceUnlockVocalNode
         private String username;
         private String password;
         private String personID;
-        public Utente(String username, String password ) {
+        public Utente(String username, String password)
+        {
             this.username = username;
             this.password = password;
         }
 
-        public String getUsername() {
+        public String getUsername()
+        {
             return username;
         }
         public String getPassword()
@@ -30,7 +32,8 @@ namespace FaceUnlockVocalNode
             return password;
         }
 
-        public void setUsername(String username) {
+        public void setUsername(String username)
+        {
             this.username = username;
         }
         public void setPassword(String password)
@@ -40,7 +43,7 @@ namespace FaceUnlockVocalNode
 
         public String getPersonID()
         {
-           return personID;
+            return personID;
         }
         public void setPersonID(String personID)
         {

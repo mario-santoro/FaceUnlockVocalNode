@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using Android;
+﻿using Android;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
 using Plugin.Media;
-using Android.Graphics;
-using MySql.Data.MySqlClient;
-using DT = System.Data;            // System.Data.dll  
+using System;
 
 
 namespace FaceUnlockVocalNode
@@ -42,7 +35,7 @@ namespace FaceUnlockVocalNode
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.regLayout);
-            // Create your application here
+
             img = (ImageView)FindViewById(Resource.Id.frameImage);
             img.Click += CamptureButton_Click;
             Button b = (Button)FindViewById(Resource.Id.registrati);
@@ -51,55 +44,59 @@ namespace FaceUnlockVocalNode
 
         private void RegOnClick(object sender, EventArgs eventArgs)
         {
-            
+            //recuperiamo l'username
             username = (EditText)FindViewById(Resource.Id.textUser);
             user = username.Text.ToString();
-
+            //recuperiamo la password
             password = (EditText)FindViewById(Resource.Id.password);
             pass = password.Text.ToString();
+            //settiamo l'oggetto utente
             Utente u = new Utente(user, pass);
             MySQL m = new MySQL();
-          
-            Boolean flag= m.inserimentoUtente(u.getUsername(), u.getPassword());
+            //inserimento dell'utente
+            Boolean flag = m.inserimentoUtente(u.getUsername(), u.getPassword());
 
             View view = (View)sender;
+
             if (flag)//se l'username inserite non esiste già
             {
-                var id= FaceUnlockVocalNode.Resources.MyCognitive.addPerson(user, ""); //creo un nuovo PersonGroup Person con l'username utente              
-                m.inserimentoPersonID(user, id);       //////////PROBLEMA:inserisco nel DB l'id PersonId dell'utente///////        
-                FaceUnlockVocalNode.Resources.MyCognitive.addFace(id, path);//aggiungo una faccia al groupPerson Person
-                FaceUnlockVocalNode.Resources.MyCognitive.trainPersonGroup("2"); //faccio il train del PersonGroup
-
+                var id = FaceUnlockVocalNode.Resources.MyCognitive.addPerson(user, ""); //creo un nuovo PersonGroup Person con l'username utente              
+                m.inserimentoPersonID(user, id);       //inserisco nel DB l'id PersonId dell'utente        
+                FaceUnlockVocalNode.Resources.MyCognitive.addFace(id, path);//aggiungo una faccia al groupPerson Person passando il path della foto scattata
+                FaceUnlockVocalNode.Resources.MyCognitive.trainPersonGroup("8"); //faccio il train del PersonGroup
+                //si passa alla home passando anche l'username dell'utente.
                 Intent openPage1 = new Intent(this, typeof(Home));
                 openPage1.PutExtra("username", u.getUsername());
                 StartActivity(openPage1);
 
             }
-            else {
+            else
+            {
                 Snackbar.Make(view, "Errore esiste già un utente con questo username: " + user, Snackbar.LengthLong)
                  .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
             }
-           
+
 
         }
 
+        //chiede i permessi per la fotocamera
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
-
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+        //quando si scatta la foto
         public void CamptureButton_Click(object sender, System.EventArgs eventArgs)
         {
             TakePhoto();
             // img.Visibility = ViewStates.Visible;
         }
 
-
+        //definisce il comportamento dopo aver scattato la foto
         async void TakePhoto()
         {
             await CrossMedia.Current.Initialize();
-
+            //dove e in che modo salvare la foto sul telefono
             var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             {
                 PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
@@ -109,16 +106,16 @@ namespace FaceUnlockVocalNode
             });
 
             if (file == null) { return; }
+            //la foto viene convertito in un array di byte
             byte[] imageArray = System.IO.File.ReadAllBytes(file.Path);
             Bitmap b = BitmapFactory.DecodeByteArray(imageArray, 0, imageArray.Length);
+            //salvo il percorso dell'immagine in una variabile di istanza
             path = file.Path.ToString();
+            //setta nel widget ImageView la foto scattata
             img.SetImageBitmap(b);
         }
 
-
-
-
     }
 }
-      
+
 

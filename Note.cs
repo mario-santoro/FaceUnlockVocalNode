@@ -12,8 +12,8 @@ using Android.Widget;
 
 namespace FaceUnlockVocalNode
 {
-    
-   public class Note
+
+    public class Note
     {
         private int id_nota;
         private String titolo;
@@ -21,7 +21,8 @@ namespace FaceUnlockVocalNode
         private String contenuto;
         private String username;
         public Note() { }
-        public Note(int id_nota, String titolo, String data, String contenuto,String username) {
+        public Note(int id_nota, String titolo, String data, String contenuto, String username)
+        {
             this.id_nota = id_nota;
             this.titolo = titolo;
             this.data = data;
@@ -32,7 +33,8 @@ namespace FaceUnlockVocalNode
         {
             return id_nota;
         }
-        public String getTitolo() {
+        public String getTitolo()
+        {
             return titolo;
         }
         public String getUsername()
@@ -47,7 +49,8 @@ namespace FaceUnlockVocalNode
         {
             return contenuto;
         }
-        public void setTitolo(String titolo) {
+        public void setTitolo(String titolo)
+        {
             this.titolo = titolo;
         }
         public void setData(String data)
@@ -66,8 +69,5 @@ namespace FaceUnlockVocalNode
         {
             this.id_nota = id_nota;
         }
-
-
-
     }
 }

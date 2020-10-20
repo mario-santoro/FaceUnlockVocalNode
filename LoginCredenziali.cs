@@ -25,41 +25,33 @@ namespace FaceUnlockVocalNode
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-           
-           
             SetContentView(Resource.Layout.loginLayout);
-            // Create your application here
+
             Button b = (Button)FindViewById(Resource.Id.log);
             b.Click += LogOnClick;
         }
 
 
-
+        //al click del bottone per il login 
         private void LogOnClick(object sender, EventArgs eventArgs)
         {
-
+            //recuperiamo l'username dall'editText
             username = (EditText)FindViewById(Resource.Id.userLog);
             user = username.Text.ToString();
-
+            //recuperiamo la password dall'editText
             password = (EditText)FindViewById(Resource.Id.passLog);
             pass = password.Text.ToString();
+            //settiamo l'oggetto Utente
             Utente u = new Utente(user, pass);
+            //controlliamo le credenziali nel DB
             MySQL m = new MySQL();
-
             Boolean flag = m.loginUtente(u.getUsername(), u.getPassword());
-
             View view = (View)sender;
-            if (flag)
+            if (flag)//se sono giuste si accede alla home, altrimenti messaggio di errore
             {
-                /* Snackbar.Make(view, "Login effettuato", Snackbar.LengthLong)
-                     .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();*/
-                
-                
-              
                 Intent openPage1 = new Intent(this, typeof(Home));
-                openPage1.PutExtra("username",u.getUsername());
+                openPage1.PutExtra("username", u.getUsername());
                 StartActivity(openPage1);
-
 
             }
             else
@@ -67,7 +59,7 @@ namespace FaceUnlockVocalNode
                 Snackbar.Make(view, "Errore credenziali errate", Snackbar.LengthLong)
                  .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
             }
-        
+
         }
 
     }

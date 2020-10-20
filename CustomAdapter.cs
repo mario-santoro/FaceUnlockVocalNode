@@ -1,5 +1,5 @@
 ﻿
-  
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +21,7 @@ namespace FaceUnlockVocalNode
     {
         List<Note> items;
         private Activity context;
-        // private int po;
-       Note item2;
+        Note item2;
         public CustomAdapter(Activity context, List<Note> items)
             : base()
         {
@@ -45,33 +44,29 @@ namespace FaceUnlockVocalNode
         {
             var item = items[position];
             item2 = item;
-            //     Console.WriteLine("id: " + item.getId_nota());
-            //po = position;
             View view = convertView;
-            if (view == null) // no view to re-use, create new
+            if (view == null)
                 view = context.LayoutInflater.Inflate(Resource.Layout.home, null);
+            // in ogni view mettiamo titlo, data ultima modifica e il bottone cancella
             view.FindViewById<TextView>(Resource.Id.titoloNota).Text = item.getTitolo();
-            view.FindViewById<TextView>(Resource.Id.dataNota).Text = "ultima modifica: "+item.getData();
+            view.FindViewById<TextView>(Resource.Id.dataNota).Text = "ultima modifica: " + item.getData();
             view.FindViewById<Button>(Resource.Id.elimina).Text = "Cancella";
-            
+
+            // al click del bottone cancella, viene cancellata la nota dal database e poi si ritorna (ricaricando la pagina) alla home
             view.FindViewById<Button>(Resource.Id.elimina).Click += (sender, args) =>
             {
                 MySQL s = new MySQL();
-               // Console.WriteLine("elimino " + item.getId_nota());
                 s.deleteNota(item.getId_nota());
-                //Toast.MakeText(Application.Context, "Stampa: " + item.getId_nota() + "titolo " + item.getTitolo(), ToastLength.Long).Show();
                 Intent openPage1 = new Intent(context, typeof(Home));
                 openPage1.PutExtra("username", item.getUsername());
                 context.StartActivity(openPage1);
             };
-            
-            
+
+            //al click sulla view si va alla pagina di modifica Nota passando nell'intent username, idNota, titolo e contenuto
             view.Click += (sender, args) =>
             {
                 Intent openPage1 = new Intent(context, typeof(ModificaNota));
-                // Toast.MakeText(Application.Context, "Stampa: " + item.getId_nota() , ToastLength.Long).Show();
                 openPage1.PutExtra("username", item.getUsername());
-
                 openPage1.PutExtra("id", "" + item.getId_nota());
                 openPage1.PutExtra("titolo", item.getTitolo());
                 openPage1.PutExtra("contenuto", item.getContenuto());
@@ -80,7 +75,7 @@ namespace FaceUnlockVocalNode
 
             return view;
         }
-        
-       
+
+
     }
 }
