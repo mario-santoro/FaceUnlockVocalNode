@@ -55,7 +55,7 @@ namespace FaceUnlockVocalNode
             Boolean flag = m.controlloUtente(user);
 
             View view = (View)sender;
-            if (flag) //se esiste un utente con questo username
+            if (flag && path!=null) //se esiste un utente con questo username
             {
                 string[] emozione = { "" };
                 int[] numFrase = new int[1];
@@ -90,7 +90,7 @@ namespace FaceUnlockVocalNode
             }
             else
             {
-                Snackbar.Make(view, "Errore non esiste un utente con questo username: " + user, Snackbar.LengthLong)
+                Snackbar.Make(view, "Errore inserisci tutti campi, o username errato: " + user, Snackbar.LengthLong)
                  .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
             }
 

@@ -44,7 +44,7 @@ namespace FaceUnlockVocalNode
             if (emozione != null)//se la stringa che dovrebbe contenere l'emozione non è null 
             {
                 int numFrase = Intent.GetIntExtra("numFrase", 0); //recuperiamo l'intero che identifica l'emozione (indice) per l'array di frasi di benvenuto
-                text = "Benvenuto " + username + ", l'emozione riscontrata nella sua foto è: " + emozione + ". Ecco la sua frase del giorno:\"" + frasi[numFrase] + "\"";
+                text = "Benvenuto " + username + ", l'emozione riscontrata nella sua foto è: " + emozione + ". Ecco la sua frase del giorno:\n\"" + frasi[numFrase] + "\"";
                 //e  settiamo il tutto nella text view di benvenuto
                 textV.Text = text;
             }

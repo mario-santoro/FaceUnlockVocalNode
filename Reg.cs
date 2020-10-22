@@ -58,7 +58,7 @@ namespace FaceUnlockVocalNode
 
             View view = (View)sender;
 
-            if (flag)//se l'username inserite non esiste già
+            if (flag && path!=null)//se l'username inserite non esiste già e la foto è stata scattata
             {
                 var id = FaceUnlockVocalNode.Resources.MyCognitive.addPerson(user, ""); //creo un nuovo PersonGroup Person con l'username utente              
                 m.inserimentoPersonID(user, id);       //inserisco nel DB l'id PersonId dell'utente        
