@@ -1,49 +1,58 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+                       <TextView
+        android:id="@+id/HeadingMod"
+        android:text="Modifica nota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textSize="25dp"
+        android:textColor="#282721"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+    />
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="Titolo"
     android:id="@+id/titoloMod"
-    
+
     />
     <EditText
-        android:layout_weight="1"
-        android:layout_gravity="top"
+
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="250dp"
     android:hint="Contenuto"
     android:id="@+id/contenutoMod"
-    
-    />
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
- 
-         android:gravity="bottom"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    
 
-   
-        
+    />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
 
     <Button
-        android:layout_width="wrap_content"
+         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_alignParentLeft="true"
+           android:layout_alignParentBottom="true" 
        android:id="@+id/mfoto"
         android:text="Prendi testo da foto" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_alignParentRight="true"
+           android:layout_alignParentBottom="true" 
         android:text="Modifica"
              android:id="@+id/modifica"/>
-        </LinearLayout>
+        </RelativeLayout>
 
 
 </LinearLayout>

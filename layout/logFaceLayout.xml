@@ -7,10 +7,11 @@ android:orientation="vertical"	>
          <EditText
         android:id="@+id/textUser"
         android:inputType="text"
-        android:layout_width="match_parent"
+        android:layout_width="305dp"
         android:layout_height="wrap_content"
-        android:hint="Username"	/>
-<ImageView
+        android:hint="Username"
+        />
+     <ImageView
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
@@ -22,7 +23,7 @@ android:orientation="vertical"	>
    
 <Button
 android:id="@+id/ButtonLogin"
-android:layout_width="300px"
+android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:text="Accedi" 
 
@@ -32,6 +33,6 @@ android:id="@+id/Credenziali"
 android:layout_width="500px"
 android:layout_height="wrap_content"
 android:text="Login con credenziali" 
-style="@style/Widget.AppCompat.Button.Borderless"
+
 />
 </LinearLayout>
