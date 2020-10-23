@@ -14,10 +14,7 @@ namespace FaceUnlockVocalNode
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        // Add your training & prediction key from the settings page of the portal
-        string trainingKey = System.Environment.GetEnvironmentVariable("b3392f8f8c5543a383ae40bcbdcf6eca");
-        string predictionKey = System.Environment.GetEnvironmentVariable("b3392f8f8c5543a383ae40bcbdcf6eca");
-        string ENDPOINT = System.Environment.GetEnvironmentVariable("https://faceunlockvocalnote.cognitiveservices.azure.com/");
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -32,22 +29,20 @@ namespace FaceUnlockVocalNode
 
 
         }
+        //se si preme il bottone per il login si va alla schermata del login
         private void LogOnClick(object sender, EventArgs eventArgs)
         {
-            /*View view = (View)sender;
-            Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
-                .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();*/
             Intent openPage1 = new Intent(this, typeof(Login));
             StartActivity(openPage1);
         }
 
-
+        //se si preme il bottone per la registrazione si va alla schermata di registrazione
         private void RegOnClick(object sender, EventArgs eventArgs)
         {
-
             Intent openPage1 = new Intent(this, typeof(Reg));
             StartActivity(openPage1);
         }
+        //richiesta dei permessi all'utente
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

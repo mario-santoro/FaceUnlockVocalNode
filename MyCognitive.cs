@@ -26,20 +26,22 @@ namespace FaceUnlockVocalNode.Resources
 {
     class MyCognitive
     {
-        
+        //chiave per servizio cognitivo per riconoscimento facciale
         static string key = "73185574f3d74f51aebe5262d6f31445";
-        // Gets the analysis of the specified image by using the Face REST API.
-       public static string Detect(string imageFilePath)
+        //chiave per servizio cognitivo OCR di riconoscimento testo nelle immagini
+        static string keyOCR = "72679f75510b4871b84b57977d217e13";
+
+        //metodo che fa una richiesta API per utilizzare la funzionalità Detect del riconoscimento facciale: dato in in input un path di una immagine, ne crea un faceId
+        //inoltre identifica anche l'emozione percepita dalla foto, la variabile numFrase è un intero che ci identifica l'emozione, emozioneMassima e numFrase sono array di gramndezza 1
+        //in modo da essere modificati per riferimento 
+        public static string Detect(string imageFilePath, string[] emozioneMassima, int[] numFrase)
         {
-
-
-            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_03&returnRecognitionModel=false&detectionModel=detection_01");
-            // Request body. Posts a locally stored JPEG image.
-
-
+            //request della richiesta
+            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/detect?returnFaceId=true&returnFaceAttributes=emotion&returnFaceLandmarks=false&recognitionModel=recognition_03&returnRecognitionModel=false&detectionModel=detection_01");
+            //conversione della foto in un array di byte 
             byte[] byteData = GetImageAsByteArray(imageFilePath);
 
-
+            //settaggio dei parametri dalla request
             request.Method = "POST";
             request.ContentType = "application/octet-stream";
             request.ContentLength = byteData.Length;
@@ -50,14 +52,31 @@ namespace FaceUnlockVocalNode.Resources
             {
                 stream.Write(byteData, 0, byteData.Length);
             }
-
+            //prendiamo la response e la convertiamo in un oggetto json
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             Console.WriteLine("Risultati: " + responseString);
             dynamic json = JsonConvert.DeserializeObject(responseString);
-
+            //array con le percentuali di ogni emozione percepita nella foto analizzata
+            double[] valoreEmozioni = { (double)json[0].faceAttributes.emotion.anger, (double)json[0].faceAttributes.emotion.contempt, (double)json[0].faceAttributes.emotion.disgust, (double)json[0].faceAttributes.emotion.fear, (double)json[0].faceAttributes.emotion.happiness, (double)json[0].faceAttributes.emotion.neutral, (double)json[0].faceAttributes.emotion.sadness, (double)json[0].faceAttributes.emotion.surprise };
+            //array delle emozioni
+            string[] emotion = { "anger", "contempt", "disgust", "fear", "happines", "neutral", "sadness", "surprise" };
+            emozioneMassima[0] = emotion[0];
+            double max = valoreEmozioni[0];
+            numFrase[0] = 0;
+            //si cerca l'emozione che ha avuto la percentuale maggiore nella foto e la si setta nella variabile passata come argomento
+            for (int i = 1; i < 8; i++)
+            {
+                if (valoreEmozioni[i] > max)
+                {
+                    max = valoreEmozioni[i];
+                    emozioneMassima[0] = emotion[i];
+                    numFrase[0] = i;
+                }
+            }
+            //restituisce il faceId generato
             var id = json[0].faceId;
-            return id ;
+            return id;
         }
 
 
@@ -69,17 +88,18 @@ namespace FaceUnlockVocalNode.Resources
                 BinaryReader binaryReader = new BinaryReader(fileStream);
                 return binaryReader.ReadBytes((int)fileStream.Length);
             }
+
         }
 
-
+        //metodo che fa una richiesta API per utilizzare la funzionalità identify del riconoscimento facciale: dato in in input il faceId generato dalla detect, 
+        //controlla se quella faccia è di una persona memorizzata nel GroupPerson del servizio cognitivo 
         public static string identify(String img)
         {
-
+            //request della richiesta
             var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/identify?recognitionModel=recognition_03");
-
-            var postData = "{\"PersonGroupId\": \"2\",\"faceIds\":[\"" + img + "\"], \"maxNumOfCandidatesReturned\": 1, \"confidenceThreshold\": 0.5}";
+            //settaggio dei parametri dalla request
+            var postData = "{\"PersonGroupId\": \"8\",\"faceIds\":[\"" + img + "\"], \"maxNumOfCandidatesReturned\": 1, \"confidenceThreshold\": 0.5}";
             var data = Encoding.UTF8.GetBytes(postData);
-
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
@@ -90,39 +110,40 @@ namespace FaceUnlockVocalNode.Resources
             {
                 stream.Write(data, 0, data.Length);
             }
-
+            //prendiamo la response e la convertiamo in un oggetto json
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
             dynamic json = JsonConvert.DeserializeObject(responseString);
-            Console.WriteLine(responseString);
             string b = String.Join(" ", json[0].candidates);
-         
-            if (b != "")
+
+            if (b != "") //se trova effettivamente una persona o candidato nel servizio cognitivo a cui può appattenere la faccia in analisi
             {
-               
+
                 int c = (int)json[0].candidates[0].confidence;
-                if (c > 0.75)
+                if (c > 0.65)// controlliamo il grado di confidence, se è maggiore dello 0.65 è affidabile, e può accedere
                 {
-                    return json[0].candidates[0].personID;
+                    return json[0].candidates[0].personId; //restituisce il personId del Person GroupPerson memorizzato nel servizio cognitivo, cioè del candidato trovato
                 }
                 else
                 {
                     return "";
                 }
-            } else {
+            }
+            else
+            {
                 return "";
             }
         }
 
-
+        //metodo che fa una richiesta API per utilizzare la funzionalità addPerson del riconoscimento facciale: crea un nuovo Person nel GroupPerson, 
+        //gli si passa l'username dell'utente aggiunto e si può passare una descrizione (entrambi parametri opzionali) 
         public static string addPerson(string nome, string userData)
         {
-            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/2/persons?recognitionModel=recognition_03");
-
+            //request della richiesta
+            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/8/persons?recognitionModel=recognition_03");
+            //settaggio dei parametri dalla request
             var postData = "{\"name\": \"" + nome + "\",\"userData\":\"" + userData + "\"}";
             var data = Encoding.UTF8.GetBytes(postData);
-
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
@@ -133,28 +154,25 @@ namespace FaceUnlockVocalNode.Resources
             {
                 stream.Write(data, 0, data.Length);
             }
-
+            //prendiamo la response e la convertiamo in un oggetto json
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             Console.WriteLine("Risultati: " + responseString);
             dynamic json = JsonConvert.DeserializeObject(responseString);
-
+            //restituiamo il personId 
             return json.personId;
 
         }
 
-
-        //aggiungere faccia al persongroup person
+        //metodo che fa una richiesta API per utilizzare la funzionalità addFace del riconoscimento facciale: aggiunge una nuova faccia a un Person nel GroupPerson, 
+        //gli si passa il personId di cui si vuole aggiungere la faccia e il path dell'immagine 
         public static void addFace(string personId, string pathImage)
         {
-
-            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/2/persons/" + personId + "/persistedFaces?detectionModel=detection_01&recognitionModel=recognition_03");
-            // Request body. Posts a locally stored JPEG image.
-
-
+            //request della richiesta
+            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/8/persons/" + personId + "/persistedFaces?detectionModel=detection_01&recognitionModel=recognition_03");
+            // l'immagine viene converita in un array di byte per essere passata comestream di dati
             byte[] byteData = GetImageAsByteArray(pathImage);
-
-
+            //settaggio dei parametri della request
             request.Method = "POST";
             request.ContentType = "application/octet-stream";
             request.ContentLength = byteData.Length;
@@ -165,7 +183,7 @@ namespace FaceUnlockVocalNode.Resources
             {
                 stream.Write(byteData, 0, byteData.Length);
             }
-
+            //prendiamo la response e la convertiamo in un oggetto json
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             Console.WriteLine("Risultati: " + responseString);
@@ -173,7 +191,8 @@ namespace FaceUnlockVocalNode.Resources
 
         }
 
-        //crea person group, in input da utente id del personGroup
+        ////metodo che fa una richiesta API per utilizzare la funzionalità create del PersonGroup del riconoscimento facciale: crea un nuovo PersonGroup
+        //prende in input il nome del personGroup da creare
         public static void createPersonGroup(string personGroup)
         {
             var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/" + personGroup + "?recognitionModel=recognition_03");
@@ -196,10 +215,9 @@ namespace FaceUnlockVocalNode.Resources
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             dynamic json = JsonConvert.DeserializeObject(responseString);
-
-          
-
         }
+        //metodo che fa una richiesta API per utilizzare la funzionalità Train del PersonGroup del riconoscimento facciale: 
+        //fa il train del personGroup ogni volta si aggiunge una nuova Person al GroupPerson 
 
         public static void trainPersonGroup(string personGroupId)
         {
@@ -222,6 +240,43 @@ namespace FaceUnlockVocalNode.Resources
 
             var response = (HttpWebResponse)request.GetResponse();
 
+        }
+
+        //metodo che fa una richiesta API per utilizzare la funzionalità OCR del servizio cognitivo di ricnoscimento del testo nelle immagini:
+        //prende in input il path dell'immagine da analizzare
+        public static string getText(string imageFilePath)
+        {
+
+            var request = (HttpWebRequest)WebRequest.Create("https://faceunlockocr.cognitiveservices.azure.com/vision/v3.1/ocr?language=it&detectOrientation=true");
+            byte[] byteData = GetImageAsByteArray(imageFilePath);
+
+            request.Method = "POST";
+            request.ContentType = "application/octet-stream";
+            request.ContentLength = byteData.Length;
+            request.Headers.Add("Ocp-Apim-Subscription-Key", keyOCR);
+            request.Host = "faceunlockocr.cognitiveservices.azure.com";
+
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(byteData, 0, byteData.Length);
+            }
+
+            var response = (HttpWebResponse)request.GetResponse();
+            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            Console.WriteLine("Risultati: " + responseString);
+            dynamic json = JsonConvert.DeserializeObject(responseString);
+            string testo = "";
+            //scorre l'oggetto json per salvare il testo trovato in una stringa da restituire in input
+            for (int i = 0; i < json.regions[0].lines.Count; i++)
+            {
+                for (int j = 0; j < json.regions[0].lines[i].words.Count; j++)
+                {
+                    testo += json.regions[0].lines[i].words[j].text + " ";
+
+                }
+            }
+
+            return testo;
         }
 
 
