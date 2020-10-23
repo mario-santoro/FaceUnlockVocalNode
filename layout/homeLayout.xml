@@ -1,19 +1,40 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:orientation="vertical"
-   android:layout_width="fill_parent"
-   android:layout_height="fill_parent">
-    <TextView android:id="@+id/Heading"
-        android:text="FaceUnlockVocalNote"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView
+        android:id="@+id/Heading"
+        android:text="RecognitionNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textSize="25dp"
+        android:textColor="@color/scritte"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+    />
+
+
+    <TextView
+        android:id="@+id/benvenuto"
+        android:text=""
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#00000000"
-        android:textSize="30dp"
-        android:textColor="@android:color/holo_orange_dark"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textColor="@color/scritte"
         android:textStyle="bold"
         android:padding="5dp"
-    />
-    <ListView 
         
+    />
+    <ListView
+        IsPullToRefreshEnabled="true"
         android:choiceMode="singleChoice"
         android:id="@+id/List"
         android:layout_width="fill_parent"
@@ -22,14 +43,36 @@
         android:cacheColorHint="#FFDAFF7F"
         android:layout_weight='1'
     />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:clickable="true"
-        android:layout_gravity="right"
-        android:id="@+id/addNota"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:background="@drawable/mybuttonOut"
+            android:layout_alignParentLeft="true"
+            android:text="Logout"     
+            
+        />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            
+            android:text="+"
+            android:background="@drawable/mybuttonPlus"
+            android:clickable="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/addNota"
+            
     />
+    </RelativeLayout>
 </LinearLayout>
