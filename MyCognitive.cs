@@ -27,9 +27,9 @@ namespace FaceUnlockVocalNode.Resources
     class MyCognitive
     {
         //chiave per servizio cognitivo per riconoscimento facciale
-        static string key = "73185574f3d74f51aebe5262d6f31445";
+        static string key = "XXXXXXXXXXXX";
         //chiave per servizio cognitivo OCR di riconoscimento testo nelle immagini
-        static string keyOCR = "72679f75510b4871b84b57977d217e13";
+        static string keyOCR = "XXXXXXXXXXX";
 
         //metodo che fa una richiesta API per utilizzare la funzionalità Detect del riconoscimento facciale: dato in in input un path di una immagine, ne crea un faceId
         //inoltre identifica anche l'emozione percepita dalla foto, la variabile numFrase è un intero che ci identifica l'emozione, emozioneMassima e numFrase sono array di gramndezza 1
