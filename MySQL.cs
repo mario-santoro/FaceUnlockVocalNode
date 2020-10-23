@@ -22,8 +22,8 @@ namespace FaceUnlockVocalNode
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder.DataSource = "server-faccia.database.windows.net";
-            builder.UserID = "annunziata";
-            builder.Password = "mario-94";
+            builder.UserID = "XXXXXXXXXXX";
+            builder.Password = "XXXXXXXXXXX";
             builder.InitialCatalog = "app";
 
             return builder;
