@@ -17,27 +17,28 @@ namespace FaceUnlockVocalNode
 {
     class MySQL
     {
+        static SqlConnectionStringBuilder builder = null;
         //metodo per ottenere la connessione al DB
-        private static SqlConnectionStringBuilder connessione()
+        public MySQL()
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            builder = new SqlConnectionStringBuilder();
             builder.DataSource = "server-faccia.database.windows.net";
-            builder.UserID = "XXXXXXXXXX";
-            builder.Password = "XXXXXXXXXX";
+            builder.UserID = "annunziata";
+            builder.Password = "mario-94";
             builder.InitialCatalog = "app";
-
-            return builder;
+  
+            //return builder;
         }
 
         //metodo per il login utente con credenziali
         public Boolean loginUtente(String username, String password)
         {
             //ottiene la connessione
-            SqlConnectionStringBuilder builder = connessione();
+         
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
             {
-                connection.Open();
+                       
                 StringBuilder sb = new StringBuilder();
                 //query
                 sb.Append("SELECT username From utente where username= '" + username + "' AND passw='" + password + "';");
@@ -45,7 +46,8 @@ namespace FaceUnlockVocalNode
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-
+                    connection.Open();
+                    command.ExecuteNonQuery();
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())//se esiste l'utente restituisce true altrimenti false
@@ -67,7 +69,6 @@ namespace FaceUnlockVocalNode
         public Boolean getPersonID(String username, String id)
         {
             //ottiene la connessione dal DB
-            SqlConnectionStringBuilder builder = connessione();
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
             {
@@ -111,7 +112,6 @@ namespace FaceUnlockVocalNode
         public Boolean controlloUtente(String username)
         {
 
-            SqlConnectionStringBuilder builder = connessione();
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
             {
@@ -145,9 +145,7 @@ namespace FaceUnlockVocalNode
 
         //inserimento del PersonId nel database, aggiunto in un secondo momento, poichè viene creato l'id dal servizio cognitivo solo se la registrazione è avvenuta con successo
         public Boolean inserimentoPersonID(String username, String personID)
-        {
-            SqlConnectionStringBuilder builder = connessione();
-
+        {         
 
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
@@ -183,7 +181,7 @@ namespace FaceUnlockVocalNode
             //si controlla che l'username selezionato non esista già, altrimenti restituisce false
             if (!controlloUtente(text))
             {
-                SqlConnectionStringBuilder builder = connessione();
+         
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
                     connection.Open();
@@ -223,8 +221,7 @@ namespace FaceUnlockVocalNode
         }
         //recupera il numero di Note, necessaria per inserimentoNota (creazione dell'ID)
         private int maxNota()
-        {
-            SqlConnectionStringBuilder builder = connessione();
+        {          
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
             {
@@ -257,8 +254,6 @@ namespace FaceUnlockVocalNode
         //metodo per  l'inserimento nota
         public void inserimentoNota(String username, Note n)
         {
-
-            SqlConnectionStringBuilder builder = connessione();
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
                 connection.Open();
@@ -314,11 +309,7 @@ namespace FaceUnlockVocalNode
         }
         //metodo per modificare le note
         public void updateNota(Note n)
-        {
-
-            SqlConnectionStringBuilder builder = connessione();
-
-
+        {    
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
             {
@@ -358,8 +349,6 @@ namespace FaceUnlockVocalNode
         //metodo per cancellare le note
         public void deleteNota(int id_nota)
         {
-
-            SqlConnectionStringBuilder builder = connessione();
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
             {
@@ -390,7 +379,6 @@ namespace FaceUnlockVocalNode
         public List<Note> getNote(String username)
         {
             List<Note> n = new List<Note>();
-            SqlConnectionStringBuilder builder = connessione();
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
             {
