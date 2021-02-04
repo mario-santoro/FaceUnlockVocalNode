@@ -29,7 +29,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 ## Tabelle Database
 <b>create table utente</b>(
   <br> username Nvarchar(20) primary key,
- <br> passw Nvarchar(16) not null,
+ <br> passw Nvarchar(100) not null,
  <br>  personID varchar(40)
 <br>)
 <br>
