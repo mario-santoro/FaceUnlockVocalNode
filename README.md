@@ -46,5 +46,5 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
      <br>on Delete cascade
 <br>)
 
-##About Us
-<img align="center" height="204" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/immagini/aboutUs.png" >
+## About Us
+<img align="center" height="300" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/immagini/aboutUs.png" >
