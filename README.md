@@ -19,9 +19,9 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 	<li>l'API Visione artificiale in Servizi cognitivi di Azure: 
 	<ul>
 		<li>Face - Analizza i visi umani in un'immagine riconoscimento facciale e emotion recognition.</li>
-	<li>Vision: OCR e Lettura - estrazione di testo (riconoscimento ottico dei caratteri) stampato o scritto a mano da immagini e creare le note testuali.</li> 
+		<li>Vision: OCR e Lettura - estrazione di testo (riconoscimento ottico dei caratteri) stampato o scritto a mano da immagini e creare le note testuali.</li> 
 		<li>Text Analytics: Sentiment Analysis – un’analisi dei sentimenti e delle opinioni espresse nei testi.</li>
-		
+	</ul>
 </ul>
 
 ## Installazione di pacchetti NuGet
