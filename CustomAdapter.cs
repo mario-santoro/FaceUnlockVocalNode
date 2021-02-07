@@ -22,6 +22,8 @@ namespace FaceUnlockVocalNode
         List<Note> items;
         private Activity context;
         Note item2;
+        String emozione;
+        int P = 0;
         public CustomAdapter(Activity context, List<Note> items)
             : base()
         {
@@ -42,6 +44,7 @@ namespace FaceUnlockVocalNode
         }
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
+           
             var item = items[position];
             item2 = item;
             View view = convertView;
@@ -55,22 +58,37 @@ namespace FaceUnlockVocalNode
             // al click del bottone cancella, viene cancellata la nota dal database e poi si ritorna (ricaricando la pagina) alla home
             view.FindViewById<Button>(Resource.Id.elimina).Click += (sender, args) =>
             {
-                MySQL s = new MySQL();
-                s.deleteNota(item.getId_nota());
-                Intent openPage1 = new Intent(context, typeof(Home));
-                openPage1.PutExtra("username", item.getUsername());
-                context.StartActivity(openPage1);
-            };
+                if (P == 0)
+                {
 
+                    emozione = context.Intent.GetStringExtra("emozione");
+                    MySQL s = new MySQL();
+                    Console.WriteLine("SONO QUI: " + item.getId_nota());
+                    s.deleteNota(item.getId_nota());
+                    Intent openPage1 = new Intent(context, typeof(Home));
+                    openPage1.PutExtra("username", item.getUsername());
+                    openPage1.PutExtra("emozione", emozione);
+                    context.StartActivity(openPage1); 
+                    P++;
+
+                }
+               
+
+
+            };
+             
             //al click sulla view si va alla pagina di modifica Nota passando nell'intent username, idNota, titolo e contenuto
             view.Click += (sender, args) =>
             {
+                
+                emozione = context.Intent.GetStringExtra("emozione");
                 Intent openPage1 = new Intent(context, typeof(ModificaNota));
                 openPage1.PutExtra("username", item.getUsername());
                 openPage1.PutExtra("id", "" + item.getId_nota());
                 openPage1.PutExtra("titolo", item.getTitolo());
                 openPage1.PutExtra("contenuto", item.getContenuto());
-                context.StartActivity(openPage1);
+                 openPage1.PutExtra("emozione", emozione);
+                context.StartActivity(openPage1); 
             };
 
             return view;
