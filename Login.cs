@@ -9,7 +9,7 @@ using Plugin.Media;
 using Android.Graphics;
 using Android.Views;
 using Android.Support.Design.Widget;
-
+using Android.Support.V4.Content;
 
 namespace FaceUnlockVocalNode
 {
@@ -18,7 +18,9 @@ namespace FaceUnlockVocalNode
     {
         Button ButtonLogin;
         ImageView img;
-
+       
+      
+   
         readonly string[] permissionGroup =
         {
             Manifest.Permission.ReadExternalStorage,
@@ -37,7 +39,7 @@ namespace FaceUnlockVocalNode
             RequestPermissions(permissionGroup, 0);
             img = (ImageView)FindViewById(Resource.Id.frameImage);
             img.Click += CamptureButton_Click;
-
+      
             ButtonLogin = (Button)FindViewById(Resource.Id.ButtonLogin);
             ButtonLogin.Click += LogOnClick;
 
@@ -46,7 +48,7 @@ namespace FaceUnlockVocalNode
 
         }
         private void LogOnClick(object sender, EventArgs eventArgs)
-        {
+        {            
             //recuperiamo l'username dall'EditText
             username = (EditText)FindViewById(Resource.Id.textUser);
             user = username.Text.ToString();
@@ -68,6 +70,9 @@ namespace FaceUnlockVocalNode
                     if (m.getPersonID(user, idP)) //e quell'id deve appartenere all'username dichiarato
                     {
                         //si accede alla home passando delle informazioni nell'intent
+
+
+                       
                         Intent openPage1 = new Intent(this, typeof(Home));
                         openPage1.PutExtra("username", user);
                         openPage1.PutExtra("emozione", emozione[0]);

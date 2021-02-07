@@ -4,17 +4,19 @@ using Android.Support.V7.App;
 using Android.Runtime;
 using Android.Widget;
 using System;
-using Android.Views;
-using Android.Support.Design.Widget;
+ 
 using Android.Content;
+using System.Text;
 
 namespace FaceUnlockVocalNode
 {
 
+
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-
+       // public event System.Timers.ElapsedEventHandler Elapsed;
+        //private static Timer aTimer;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -27,8 +29,35 @@ namespace FaceUnlockVocalNode
             Button b2 = (Button)FindViewById(Resource.Id.buttonReg);
             b2.Click += RegOnClick;
 
+         
+           /*
+            aTimer = new System.Timers.Timer();
+            aTimer.Interval = 5000;
 
+            // Hook up the Elapsed event for the timer. 
+            aTimer.Elapsed += OnTimedEvent;
+
+            // Have the timer fire repeated events (true is the default)
+            aTimer.AutoReset = true;
+
+            // Start the timer
+            aTimer.Enabled = true;
+
+            Console.WriteLine("Press the Enter key to exit the program at any time... ");
+            Console.ReadLine();
+          */
         }
+        /*
+                private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+                {
+                    Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);
+
+                }
+
+            */
+
+      
+
         //se si preme il bottone per il login si va alla schermata del login
         private void LogOnClick(object sender, EventArgs eventArgs)
         {

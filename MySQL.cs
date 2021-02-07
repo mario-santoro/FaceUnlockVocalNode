@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Android.App;
@@ -22,11 +23,10 @@ namespace FaceUnlockVocalNode
         public MySQL()
         {
             builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "server-faccia.database.windows.net";
-            builder.UserID = "annunziata";
-            builder.Password = "mario-94";
-            builder.InitialCatalog = "app";
-  
+             builder.DataSource = "recognitionoteserver.database.windows.net";
+             builder.UserID = "m.caracciolo9@studenti.unisa.it@recognitionoteserver";
+             builder.Password = "mario-94";
+             builder.InitialCatalog = "recognitioNoteDB"; 
             //return builder;
         }
 
@@ -38,10 +38,10 @@ namespace FaceUnlockVocalNode
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
 
             {
-                       
+              
                 StringBuilder sb = new StringBuilder();
                 //query
-                sb.Append("SELECT username From utente where username= '" + username + "' AND passw='" + password + "';");
+                sb.Append("SELECT username From utente where username= '" + username + "' AND passw='" + Hash(password)+ "';");
                 String sql = sb.ToString();
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
@@ -174,10 +174,29 @@ namespace FaceUnlockVocalNode
             }
 
         }
+        static string Hash(string input)
+        {
+            using (SHA1Managed sha1 = new SHA1Managed())
+            {
+                var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(input));
+                var sb = new StringBuilder(hash.Length * 2);
 
+                foreach (byte b in hash)
+                {
+                    // can be "x2" if you want lowercase
+                    sb.Append(b.ToString("X2"));
+                }
+
+                return sb.ToString();
+            }
+        }
         //inserimento utente, cioè registrazione
         public Boolean inserimentoUtente(String text, String pasw)
         {
+            Console.WriteLine("la password hash: "+pasw);
+            pasw = Hash(pasw);
+             
+            
             //si controlla che l'username selezionato non esista già, altrimenti restituisce false
             if (!controlloUtente(text))
             {
@@ -191,24 +210,9 @@ namespace FaceUnlockVocalNode
                     {
                         command.Connection = connection;
                         command.CommandType = DT.CommandType.Text;
-                        command.CommandText = @"  
-                        INSERT INTO utente  
-                                (
-                                username,  
-                                passw 
-                                )  
-                            VALUES  
-                                (
-                                @username,  
-                                @passw  
-                                ); ";
-                        parameter = new SqlParameter("@username", DT.SqlDbType.NVarChar, 20);
-                        parameter.Value = text;
-                        command.Parameters.Add(parameter);
-
-                        parameter = new SqlParameter("@passw", DT.SqlDbType.NVarChar, 16);
-                        parameter.Value = pasw;
-                        command.Parameters.Add(parameter);
+                        command.CommandText = " INSERT INTO utente (username, passw) VALUES ('"+text+"','"+pasw+"'); ";
+                        
+                      
                         command.ExecuteScalar();
                         return true;
                     }
@@ -218,6 +222,7 @@ namespace FaceUnlockVocalNode
             {
                 return false;
             }
+           
         }
         //recupera il numero di Note, necessaria per inserimentoNota (creazione dell'ID)
         private int maxNota()
@@ -227,7 +232,7 @@ namespace FaceUnlockVocalNode
             {
                 connection.Open();
                 StringBuilder sb = new StringBuilder();
-                sb.Append("SELECT Count(id_nota) From nota;");
+                sb.Append("SELECT MAX(id_nota) From nota;");
 
                 String sql = sb.ToString();
 
@@ -335,7 +340,7 @@ namespace FaceUnlockVocalNode
                     parameter.Value = n.getData();
                     command.Parameters.Add(parameter);
 
-                    parameter = new SqlParameter("@contenuto", DT.SqlDbType.NVarChar, 16);
+                    parameter = new SqlParameter("@contenuto", DT.SqlDbType.NVarChar, 4000);
                     parameter.Value = n.getContenuto();
                     command.Parameters.Add(parameter);
 

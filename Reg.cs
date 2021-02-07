@@ -57,13 +57,13 @@ namespace FaceUnlockVocalNode
             Boolean flag = m.inserimentoUtente(u.getUsername(), u.getPassword());
 
             View view = (View)sender;
-
+            
             if (flag && path!=null)//se l'username inserite non esiste già e la foto è stata scattata
             {
                 var id = FaceUnlockVocalNode.Resources.MyCognitive.addPerson(user, ""); //creo un nuovo PersonGroup Person con l'username utente              
                 m.inserimentoPersonID(user, id);       //inserisco nel DB l'id PersonId dell'utente        
                 FaceUnlockVocalNode.Resources.MyCognitive.addFace(id, path);//aggiungo una faccia al groupPerson Person passando il path della foto scattata
-                FaceUnlockVocalNode.Resources.MyCognitive.trainPersonGroup("8"); //faccio il train del PersonGroup
+                FaceUnlockVocalNode.Resources.MyCognitive.trainPersonGroup("1"); //faccio il train del PersonGroup
                 //si passa alla home passando anche l'username dell'utente.
                 Intent openPage1 = new Intent(this, typeof(Home));
                 openPage1.PutExtra("username", u.getUsername());
@@ -75,7 +75,7 @@ namespace FaceUnlockVocalNode
                 Snackbar.Make(view, "Errore esiste già un utente con questo username: " + user, Snackbar.LengthLong)
                  .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
             }
-
+            
 
         }
 

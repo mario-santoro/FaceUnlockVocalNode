@@ -21,15 +21,18 @@ using System.Text.Json.Serialization;
 using System.Net.Http;
 using System.Net;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace FaceUnlockVocalNode.Resources
 {
     class MyCognitive
     {
         //chiave per servizio cognitivo per riconoscimento facciale
-        static string key = "XXXXXXXXXXXX";
+        static string key = "3f96cd77f7994d6795e54b5884c71c50";
         //chiave per servizio cognitivo OCR di riconoscimento testo nelle immagini
-        static string keyOCR = "XXXXXXXXXXX";
+        static string keyOCR = "e782204ce056471783f81c5ddd59a48b";
+        static string keySentimentAnalsys = "58934901b0aa475c902c35db9870d217";
+        //chiave per servizio cognitivo per sentiment analisys del testo
 
         //metodo che fa una richiesta API per utilizzare la funzionalità Detect del riconoscimento facciale: dato in in input un path di una immagine, ne crea un faceId
         //inoltre identifica anche l'emozione percepita dalla foto, la variabile numFrase è un intero che ci identifica l'emozione, emozioneMassima e numFrase sono array di gramndezza 1
@@ -37,7 +40,7 @@ namespace FaceUnlockVocalNode.Resources
         public static string Detect(string imageFilePath, string[] emozioneMassima, int[] numFrase)
         {
             //request della richiesta
-            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/detect?returnFaceId=true&returnFaceAttributes=emotion&returnFaceLandmarks=false&recognitionModel=recognition_03&returnRecognitionModel=false&detectionModel=detection_01");
+            var request = (HttpWebRequest)WebRequest.Create("https://RecognitioNoteViso.cognitiveservices.azure.com/face/v1.0/detect?returnFaceId=true&returnFaceAttributes=emotion&returnFaceLandmarks=false&recognitionModel=recognition_03&returnRecognitionModel=false&detectionModel=detection_01");
             //conversione della foto in un array di byte 
             byte[] byteData = GetImageAsByteArray(imageFilePath);
 
@@ -46,7 +49,7 @@ namespace FaceUnlockVocalNode.Resources
             request.ContentType = "application/octet-stream";
             request.ContentLength = byteData.Length;
             request.Headers.Add("Ocp-Apim-Subscription-Key", key);
-            request.Host = "provaFaccia.cognitiveservices.azure.com";
+            request.Host = "recognitionoteviso.cognitiveservices.azure.com";
 
             using (var stream = request.GetRequestStream())
             {
@@ -96,15 +99,15 @@ namespace FaceUnlockVocalNode.Resources
         public static string identify(String img)
         {
             //request della richiesta
-            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/identify?recognitionModel=recognition_03");
+            var request = (HttpWebRequest)WebRequest.Create("https://RecognitioNoteViso.cognitiveservices.azure.com/face/v1.0/identify?recognitionModel=recognition_03");
             //settaggio dei parametri dalla request
-            var postData = "{\"PersonGroupId\": \"8\",\"faceIds\":[\"" + img + "\"], \"maxNumOfCandidatesReturned\": 1, \"confidenceThreshold\": 0.5}";
+            var postData = "{\"PersonGroupId\": \"1\",\"faceIds\":[\"" + img + "\"], \"maxNumOfCandidatesReturned\": 1, \"confidenceThreshold\": 0.5}";
             var data = Encoding.UTF8.GetBytes(postData);
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
             request.Headers.Add("Ocp-Apim-Subscription-Key", key);
-            request.Host = "provaFaccia.cognitiveservices.azure.com";
+            request.Host = "recognitionoteviso.cognitiveservices.azure.com";
 
             using (var stream = request.GetRequestStream())
             {
@@ -140,7 +143,7 @@ namespace FaceUnlockVocalNode.Resources
         public static string addPerson(string nome, string userData)
         {
             //request della richiesta
-            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/8/persons?recognitionModel=recognition_03");
+            var request = (HttpWebRequest)WebRequest.Create("https://RecognitioNoteViso.cognitiveservices.azure.com/face/v1.0/persongroups/1/persons?recognitionModel=recognition_03");
             //settaggio dei parametri dalla request
             var postData = "{\"name\": \"" + nome + "\",\"userData\":\"" + userData + "\"}";
             var data = Encoding.UTF8.GetBytes(postData);
@@ -148,7 +151,7 @@ namespace FaceUnlockVocalNode.Resources
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
             request.Headers.Add("Ocp-Apim-Subscription-Key", key);
-            request.Host = "provaFaccia.cognitiveservices.azure.com";
+            request.Host = "recognitionoteviso.cognitiveservices.azure.com";
 
             using (var stream = request.GetRequestStream())
             {
@@ -169,7 +172,7 @@ namespace FaceUnlockVocalNode.Resources
         public static void addFace(string personId, string pathImage)
         {
             //request della richiesta
-            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/8/persons/" + personId + "/persistedFaces?detectionModel=detection_01&recognitionModel=recognition_03");
+            var request = (HttpWebRequest)WebRequest.Create("https://RecognitioNoteViso.cognitiveservices.azure.com/face/v1.0/persongroups/1/persons/" + personId + "/persistedFaces?detectionModel=detection_01&recognitionModel=recognition_03");
             // l'immagine viene converita in un array di byte per essere passata comestream di dati
             byte[] byteData = GetImageAsByteArray(pathImage);
             //settaggio dei parametri della request
@@ -177,7 +180,7 @@ namespace FaceUnlockVocalNode.Resources
             request.ContentType = "application/octet-stream";
             request.ContentLength = byteData.Length;
             request.Headers.Add("Ocp-Apim-Subscription-Key", key);
-            request.Host = "provaFaccia.cognitiveservices.azure.com";
+            request.Host = "recognitionoteviso.cognitiveservices.azure.com";
 
             using (var stream = request.GetRequestStream())
             {
@@ -195,7 +198,7 @@ namespace FaceUnlockVocalNode.Resources
         //prende in input il nome del personGroup da creare
         public static void createPersonGroup(string personGroup)
         {
-            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/" + personGroup + "?recognitionModel=recognition_03");
+            var request = (HttpWebRequest)WebRequest.Create("https://RecognitioNoteViso.cognitiveservices.azure.com/face/v1.0/persongroups/" + personGroup + "?recognitionModel=recognition_03");
 
             var postData = "{\"name\": \"nome\",\"userData\":\"gruppo\",\"recognitionModel\":\"recognition_03\"}";
             var data = Encoding.UTF8.GetBytes(postData);
@@ -205,7 +208,7 @@ namespace FaceUnlockVocalNode.Resources
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
             request.Headers.Add("Ocp-Apim-Subscription-Key", key);
-            request.Host = "provaFaccia.cognitiveservices.azure.com";
+            request.Host = "recognitionoteviso.cognitiveservices.azure.com";
 
             using (var stream = request.GetRequestStream())
             {
@@ -222,7 +225,7 @@ namespace FaceUnlockVocalNode.Resources
         public static void trainPersonGroup(string personGroupId)
         {
 
-            var request = (HttpWebRequest)WebRequest.Create("https://provaFaccia.cognitiveservices.azure.com/face/v1.0/persongroups/" + personGroupId + "/train?recognitionModel=recognition_03");
+            var request = (HttpWebRequest)WebRequest.Create("https://RecognitioNoteViso.cognitiveservices.azure.com/face/v1.0/persongroups/" + personGroupId + "/train?recognitionModel=recognition_03");
 
             var postData = "";
             var data = Encoding.UTF8.GetBytes(postData);
@@ -230,8 +233,8 @@ namespace FaceUnlockVocalNode.Resources
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
-            request.Headers.Add("Ocp-Apim-Subscription-Key", "73185574f3d74f51aebe5262d6f31445");
-            request.Host = "provaFaccia.cognitiveservices.azure.com";
+            request.Headers.Add("Ocp-Apim-Subscription-Key", key);
+            request.Host = "recognitionoteviso.cognitiveservices.azure.com";
 
             using (var stream = request.GetRequestStream())
             {
@@ -247,14 +250,14 @@ namespace FaceUnlockVocalNode.Resources
         public static string getText(string imageFilePath)
         {
 
-            var request = (HttpWebRequest)WebRequest.Create("https://faceunlockocr.cognitiveservices.azure.com/vision/v3.1/ocr?language=it&detectOrientation=true");
+            var request = (HttpWebRequest)WebRequest.Create("https://recognitionnoteocr.cognitiveservices.azure.com/vision/v3.1/ocr?language=it&detectOrientation=true");
             byte[] byteData = GetImageAsByteArray(imageFilePath);
 
             request.Method = "POST";
             request.ContentType = "application/octet-stream";
             request.ContentLength = byteData.Length;
             request.Headers.Add("Ocp-Apim-Subscription-Key", keyOCR);
-            request.Host = "faceunlockocr.cognitiveservices.azure.com";
+            request.Host = "recognitionnoteocr.cognitiveservices.azure.com";
 
             using (var stream = request.GetRequestStream())
             {
@@ -275,10 +278,26 @@ namespace FaceUnlockVocalNode.Resources
 
                 }
             }
-
+           
             return testo;
         }
 
+        public static double getSentimentText(string frase)
+        {
+            var client = new WebClient();
+            client.Headers.Add("Ocp-Apim-Subscription-Key", keySentimentAnalsys);
+            client.Headers.Add("Content-type", "application/json");
+            client.Headers.Add("Accept", "application/json");
+            // Determine sentiment
+            var postData2 = @"{""documents"":[{""id"":""1"", ""language"":""@language"", ""text"":""@sampleText""}]}".Replace(
+                                 "@sampleText", frase).Replace("@language", "it");
+            var response2 = client.UploadString("https://recognitionotetestanalsys.cognitiveservices.azure.com/text/analytics/v2.1/sentiment", postData2);
+            var sentimentStr = new Regex(@"""score"":([\d.]+)").Match(response2).Groups[1].Value;
+            var sentiment = Convert.ToDouble(sentimentStr, System.Globalization.CultureInfo.InvariantCulture);
 
+ 
+            //restituiamo lo score 
+            return  sentiment;
+        }
     }
 }
