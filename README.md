@@ -29,7 +29,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 	<li>Database SQL</li>
 	<li>Servizi cognitivi: 
 	<ul>
-		<li>Face: Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la riorsa Face andando a settare i seguenti parametri</li>
+		<li>Face: Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la risorsa Face, accedendo prima al pannello di creazione di servizi cognitivi presente nella pagina "Risorse" di Azure, successivametne creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
 		<ul>
 			<li>Gruppo di risorse (Cerarne uno nuovo nel caso non vi è presente già uno precedentemente creato)</li>
 			<li>Settare la regione del server a quale fare riferimento</li>
@@ -49,7 +49,7 @@ Per poter andare a utilizzare librerie che si interfacciano con gli strumenti me
 </ul>
 Per il pacchetti "Cognitive services" bisogna prima andare sulla console di gestione di pacchetti NuGet di progetto, dalla quale possiamo accedere tramite il menù a tendina su Visual studio nominato "Strumenti" -> "Gestione pacchetti NuGet" -> "Console", e inserire il seguente codice 
 ```
-Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
+	Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
 ```
 
 ## About Us
