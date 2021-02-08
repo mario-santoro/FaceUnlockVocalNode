@@ -46,7 +46,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 		<li>Selezionare Avanti: Impostazioni aggiuntive nella parte inferiore della pagina.</li>
 		<li>Selezionare Rivedi e crea nella parte inferiore della pagina</li>		
 	</ul>
-	<li>Servizi cognitivi: 
+	<li>Servizi cognitivi: L'utente si trova sul portale Azure cliccando su Servizi cognitivi si troverà nel marketplace dei servizi cognitivi, e tramtie la barra di ricerca potrò cercare i seguenti servizi:
 	<ul>
 		<li>Face: Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la risorsa Face, accedendo prima al pannello di creazione di servizi cognitivi presente nella pagina "Risorse" di Azure, successivametne creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
 		<ul>
@@ -55,8 +55,11 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 			<li>Settare il nome della risorsa che si sta creando</li>
 			<li>Andare a selezionare la fatturazizone del servizio (F0 darà risorse gratis fino a 5k chiamate al minuto e 30k chiamate al mese)</li>
 		</ul>
-		<li>Vision: OCR e Lettura</li> 
-		<li>Text Analytics: Sentiment Analysis</li>
+		<li>Visione artificiale: oOCR e lettura: l'utente cliccerà sul bottone crea e avrà avanti a se la schermata con le varie impostazioni da settare:</li> 
+		<ul>
+			<li></li>
+		</ul>
+		<li>Text Analytics: Sentiment Analysis: </li>
 	</ul>
 </ul>
 
