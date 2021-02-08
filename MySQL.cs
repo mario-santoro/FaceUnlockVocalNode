@@ -24,8 +24,8 @@ namespace FaceUnlockVocalNode
         {
             builder = new SqlConnectionStringBuilder();
              builder.DataSource = "recognitionoteserver.database.windows.net";
-             builder.UserID = "m.caracciolo9@studenti.unisa.it@recognitionoteserver";
-             builder.Password = "mario-94";
+             builder.UserID = "id";
+             builder.Password = "passw";
              builder.InitialCatalog = "recognitioNoteDB"; 
             //return builder;
         }
