@@ -33,6 +33,8 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 		<ul>
 			<li>Gruppo di risorse (Cerarne uno nuovo nel caso non vi è presente già uno precedentemente creato)</li>
 			<li>Settare la regione del server a quale fare riferimento</li>
+			<li>Settare il nome della risorsa che si sta creando</li>
+			<li>Andare a selezionare la fatturazizone del servizio (F0 darà risorse gratis fino a 5k chiamate al minuto e 30k chiamate al mese)</li>
 		</ul>
 		<li>Vision: OCR e Lettura</li> 
 		<li>Text Analytics: Sentiment Analysis</li>
