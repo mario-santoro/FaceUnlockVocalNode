@@ -48,9 +48,8 @@ Per poter andare a utilizzare librerie che si interfacciano con gli strumenti me
 	<li>Cognitive services</li>
 </ul>
 Per il pacchetti "Cognitive services" bisogna prima andare sulla console di gestione di pacchetti NuGet di progetto, dalla quale possiamo accedere tramite il menù a tendina su Visual studio nominato "Strumenti" -> "Gestione pacchetti NuGet" -> "Console", e inserire il seguente codice 
-```console
-foo@bar:~$ Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
-
+```
+Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
 ```
 
 ## About Us
