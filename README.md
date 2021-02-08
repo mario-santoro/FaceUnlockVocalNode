@@ -24,6 +24,13 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 	</ul>
 </ul>
 
+## Instaziamento servizi Azure
+-Creazione Databasw Sql
+-Avvio serivi cognitivi
+	-Face
+	-vision
+	-texAnalitycs
+
 ## Installazione di pacchetti NuGet
 - System.Data.SqlClient
 - Cognitive services: Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
