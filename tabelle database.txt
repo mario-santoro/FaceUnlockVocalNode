@@ -1,0 +1,16 @@
+create table utente(
+  username Nvarchar(20) primary key,
+  passw Nvarchar(100) not null,
+  personID varchar(40)
+ )
+
+create table nota(
+   id_nota int Primary key,
+   titolo Nvarchar(20) not null,
+   data_nota Nvarchar(50) not null,
+   contenuto Nvarchar(4000) not null,
+   username Nvarchar(20) NOT NULL,
+   FOREIGN KEY (username) REFERENCES utente(username)
+   on Update cascade
+   on Delete cascade
+  )
