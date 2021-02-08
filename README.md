@@ -26,7 +26,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 
 ## Usage
 <ul>
-	<li>Database SQL:  Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la risorsa SQL, accedendo prima al pannello di creazione di un Database SQL presente nella pagina "Risorse" di Azure, successivametne creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
+	<li><a href="https://docs.microsoft.com/it-it/azure/azure-sql/database/single-database-create-quickstart?tabs=azure-portal">Database SQL</a>:  Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la risorsa SQL, accedendo prima al pannello di creazione di un Database SQL presente nella pagina "Risorse" di Azure, successivametne creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
 	<ul>
 		<li>In Gruppo di risorse selezionare Crea nuovo, immettere myResourceGroup e quindi fare clic su OK</li>
 		<li>In Nome database immettere il nome del database</li>
