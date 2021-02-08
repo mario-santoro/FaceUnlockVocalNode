@@ -42,8 +42,13 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 </ul>
 
 ## Installazione di pacchetti NuGet
-- System.Data.SqlClient
-- Cognitive services: Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
-
+Per poter andare a utilizzare librerie che si interfacciano con gli strumenti messi a disposizione da Azure, da Visual Studio bisogna, dopo aver creato un progetto App Android (Xamarin), bisogna cliccare con il tasto destro sul nome del progetto, presente nel pannello esplora risorse sulla destra dell'interfaccia, e selezionare l'opzione pacchetti NuGet, da qui ci si aprirà una schermata dalla quale potremmo vedere i pacchetti già installati, quelli da aggiornare e installarne di nuovi. Cliccando sul tab "installa" avremo avanti una schermata che ci proporrà tutti i pacchetti messi a disposizione, e tramtite una ricerca possiamo andare a filtrare i pacchetti proposti. Quelli da ricercare e installare sono i seguenti: 
+<ul>
+	<li>System.Data.SqlClient</li>
+	<li>Cognitive services</li>
+</ul>
+Per il pacchetti "Cognitive services" bisogna prima andare sulla console di gestione di pacchetti NuGet di progetto, dalla quale possiamo accedere tramite il menù a tendina su Visual studio nominato "Strumenti" -> "Gestione pacchetti NuGet" -> "Console", e inserire il seguente codice ```bash
+Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
+```
 ## About Us
 <img align="center" height="300" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/immagini/aboutUs.png" >
