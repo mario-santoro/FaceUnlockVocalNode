@@ -45,25 +45,5 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 - System.Data.SqlClient
 - Cognitive services: Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
 
-## Tabelle Database
-```sql
-create table utente(
-  username Nvarchar(20) primary key,
-  passw Nvarchar(100) not null,
-  personID varchar(40)
- )
-
-create table nota(
-   id_nota int Primary key,
-   titolo Nvarchar(20) not null,
-   data_nota Nvarchar(50) not null,
-   contenuto Nvarchar(4000) not null,
-   username Nvarchar(20) NOT NULL,
-   FOREIGN KEY (username) REFERENCES utente(username)
-   on Update cascade
-   on Delete cascade
-  )
-```
-
 ## About Us
 <img align="center" height="300" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/immagini/aboutUs.png" >
