@@ -48,18 +48,25 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 	</ul>
 	<li>Servizi cognitivi: L'utente si trova sul portale Azure cliccando su Servizi cognitivi si troverà nel marketplace dei servizi cognitivi, e tramtie la barra di ricerca potrò cercare i seguenti servizi:
 	<ul>
-		<li>Face: Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la risorsa Face, accedendo prima al pannello di creazione di servizi cognitivi presente nella pagina "Risorse" di Azure, successivametne creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
+		<li>Viso: Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la risorsa Face, accedendo prima al pannello di creazione di servizi cognitivi presente nella pagina "Risorse" di Azure, successivametne creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
 		<ul>
 			<li>Gruppo di risorse (Cerarne uno nuovo nel caso non vi è presente già uno precedentemente creato)</li>
 			<li>Settare la regione del server a quale fare riferimento</li>
 			<li>Settare il nome della risorsa che si sta creando</li>
-			<li>Andare a selezionare la fatturazizone del servizio (F0 darà risorse gratis fino a 5k chiamate al minuto e 30k chiamate al mese)</li>
+			<li>Andare a selezionare la fatturazizone del servizio, F0 darà risorse gratis fino a 20 chiamate al minuto e 30k chiamate al mese</li>
 		</ul>
-		<li>Visione artificiale: oOCR e lettura: l'utente cliccerà sul bottone crea e avrà avanti a se la schermata con le varie impostazioni da settare:</li> 
+		<li>Visione artificiale, per OCR e lettura: l'utente cliccherà sul bottone crea e avrà avanti a se la schermata con le varie impostazioni da settare:</li> 
 		<ul>
-			<li></li>
+			<li>Gruppo di risorse (Cerarne uno nuovo nel caso non vi è presente già uno precedentemente creato)</li>
+			<li>Nome del servizio</li>
+			<li>Piano tariffario, F0 che darà gratis 20 chiamate al minuto e 5k chiamate al mese</li>
 		</ul>
 		<li>Text Analytics: Sentiment Analysis: </li>
+		<ul>
+			<li>Gruppo di risorse (Cerarne uno nuovo nel caso non vi è presente già uno precedentemente creato)</li>
+			<li>Nome del servizio</li>
+			<li>Piano tariffario, F0 che darà gratis 5k transizioni per i primi 30 giorni</li>
+		</ul>
 	</ul>
 </ul>
 
@@ -70,8 +77,9 @@ Per poter andare a utilizzare librerie che si interfacciano con gli strumenti me
 	<li>Cognitive services</li>
 </ul>
 Per il pacchetti "Cognitive services" bisogna prima andare sulla console di gestione di pacchetti NuGet di progetto, dalla quale possiamo accedere tramite il menù a tendina su Visual studio nominato "Strumenti" -> "Gestione pacchetti NuGet" -> "Console", e inserire il seguente codice 
+
 ```console
-	Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
+Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
 ```
 
 ## About Us
