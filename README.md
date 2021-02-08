@@ -36,7 +36,7 @@ create table utente(
   personID varchar(40)
  )
 
-create table nota</b>(
+create table nota(
    id_nota int Primary key,
    titolo Nvarchar(20) not null,
    data_nota Nvarchar(50) not null,
