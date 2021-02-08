@@ -39,7 +39,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 		</ul>
 		<li>Lasciare l'opzione Usare il pool elastico SQL? impostata su No</li>
 		<li>In Calcolo e archiviazione selezionare Configura database</li>
-		<li>Questo argomento di avvio rapido usa un database serverless, quindi selezionare Serverless e quindi Applica</li>
+		<li>Questo argomento di avvio rapido usa un database serverless, quindi selezionare Basic e quindi Applica</li>
 		<li>Selezionare Avanti: Rete nella parte inferiore della pagina.</li>
 		<li>In Regole del firewall impostare Aggiungi indirizzo IP client corrente su Sì. Lasciare l'opzione Consenti alle risorse e ai servizi di Azure di accedere a questo server impostata su No.
 </li>
