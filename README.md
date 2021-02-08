@@ -26,7 +26,18 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 
 ## Usage
 <ul>
-	<li>Database SQL</li>
+	<li>Database SQL:  Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la risorsa SQL, accedendo prima al pannello di creazione di un Database SQL presente nella pagina "Risorse" di Azure, successivametne creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
+	<ul>
+		<li>In Gruppo di risorse selezionare Crea nuovo, immettere myResourceGroup e quindi fare clic su OK</li>
+		<li>In Nome database immettere il nome del database</li>
+		<li>In server selezionare Crea nuovo e compilare il modulo Nuovo server con i valori seguenti:</li>
+		<ul>
+			<li>Nome server: immettere mysqlserver e aggiungere alcuni caratteri per l'univocità. Non è possibile specificare un nome di server esatto da usare perché i nomi di tutti i server di Azure devono essere univoci a livello globale, non solo univoci all'interno di una sottoscrizione. Immettere quindi un valore come mysqlserver12345 e il portale segnala se è disponibile o meno.</li>
+			<li>Account di accesso amministratore server: digitare azureuser.</li>
+			<li>Password: immettere una password che soddisfi i requisiti e immetterla di nuovo nel campo Conferma password.</li>
+			<li>Località: selezionare una località dall'elenco a discesa.</li>
+		</ul>
+	</ul>
 	<li>Servizi cognitivi: 
 	<ul>
 		<li>Face: Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la risorsa Face, accedendo prima al pannello di creazione di servizi cognitivi presente nella pagina "Risorse" di Azure, successivametne creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
