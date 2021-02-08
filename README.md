@@ -24,12 +24,16 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 	</ul>
 </ul>
 
-## Instaziamento servizi Azure
+## Usage
 <ul>
 	<li>Database SQL</li>
 	<li>Servizi cognitivi: 
 	<ul>
-		<li>Face </li>
+		<li>Face: Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la riorsa Face andando a settare i seguenti parametri</li>
+		<ul>
+			<li>Gruppo di risorse (Cerarne uno nuovo nel caso non vi è presente già uno precedentemente creato)</li>
+			<li>Settare la regione del server a quale fare riferimento</li>
+		</ul>
 		<li>Vision: OCR e Lettura</li> 
 		<li>Text Analytics: Sentiment Analysis</li>
 	</ul>
