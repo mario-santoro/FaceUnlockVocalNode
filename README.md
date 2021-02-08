@@ -29,6 +29,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 - Cognitive services: Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-preview.1
 
 ## Tabelle Database
+```
 <b>create table utente</b>(
   <br> username Nvarchar(20) primary key,
  <br> passw Nvarchar(100) not null,
@@ -45,6 +46,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
      <br>on Update cascade
      <br>on Delete cascade
 <br>)
+```
 
 ## About Us
 <img align="center" height="300" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/immagini/aboutUs.png" >
