@@ -68,7 +68,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 		<li>Selezionare Avanti: Impostazioni aggiuntive nella parte inferiore della pagina.</li>
 		<li>Selezionare Rivedi e crea nella parte inferiore della pagina</li>		
 	</ul>
-	<li>Servizi cognitivi: L'utente si trova sul portale Azure cliccando su Servizi cognitivi si troverà nel marketplace dei servizi cognitivi, e tramtie la barra di ricerca potrò cercare i seguenti servizi:
+	<li><a href="https://docs.microsoft.com/it-it/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows">Servizi cognitivi</a>: L'utente si trova sul portale Azure cliccando su Servizi cognitivi si troverà nel marketplace dei servizi cognitivi, e tramtie la barra di ricerca potrò cercare i seguenti servizi:
 	<ul>
 		<li>Viso: Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la risorsa Face, accedendo prima al pannello di creazione di servizi cognitivi presente nella pagina "Risorse" di Azure, successivametne creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
 		<ul>
