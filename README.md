@@ -7,7 +7,7 @@ Ha come scopo quello di utilizzare i servizi offerti da Microsoft Azure.
 
 ## Indice
 <ul>
-	<li> [Descrizione](Descrizione) - Descrizione</a></li>
+	<li> [Descrizione - Link](#Descrizione) - Descrizione</a></li>
 	<li></li>
 </ul>
 
