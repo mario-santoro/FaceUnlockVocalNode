@@ -90,7 +90,12 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 			<li>Piano tariffario, F0 che darà gratis 5k transizioni per i primi 30 giorni</li>
 		</ul>
 	</ul>
+	<li>Per poter utilizzare il DatabaseSQL bisogna prima andaare a creare le tabelle, quindi recarsi sulla risorsa presente sul portale Azure e cliccare, tramite il menù laterale sinistro, su editor di query e inserire le tabelle presenti nella repository nella cartella "Tabelle Database". Successivametne prendere il nome del server e andare nel file MySQL.cs e sostituire con le proprie credenziali: DataSource (nomeserver), UserID, Password, InitialCatalog (nome DB)</li>
+	<li>Per poter utilizzare i servizi cognitivi, recarsi in ognuna delle risorse create e prendere le rispettiche chiavi (Key) ed endpoint, e andarli a sostituire nel file MyCognitive.cs</li>
+	
 </ul>
+
+
 
 ## Installazione di pacchetti NuGet
 Per poter andare a utilizzare librerie che si interfacciano con gli strumenti messi a disposizione da Azure, da Visual Studio bisogna, dopo aver creato un progetto App Android (Xamarin), bisogna cliccare con il tasto destro sul nome del progetto, presente nel pannello esplora risorse sulla destra dell'interfaccia, e selezionare l'opzione pacchetti NuGet, da qui ci si aprirà una schermata dalla quale potremmo vedere i pacchetti già installati, quelli da aggiornare e installarne di nuovi. Cliccando sul tab "installa" avremo avanti una schermata che ci proporrà tutti i pacchetti messi a disposizione, e tramtite una ricerca possiamo andare a filtrare i pacchetti proposti. Quelli da ricercare e installare sono i seguenti: 
