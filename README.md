@@ -5,7 +5,7 @@
 Questa è un app Android sviluppata per l'esame di laurea magistrale informatica curriculum Cloud Computing dell'Università degli Studi di Salerno.
 Ha come scopo quello di utilizzare i servizi offerti da Microsoft Azure. 
 
-##Indice
+## Indice
 <ul>
 	<li><a href="Descrizione">Descrizione</a></li>
 	<li></li>
