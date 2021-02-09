@@ -5,6 +5,12 @@
 Questa è un app Android sviluppata per l'esame di laurea magistrale informatica curriculum Cloud Computing dell'Università degli Studi di Salerno.
 Ha come scopo quello di utilizzare i servizi offerti da Microsoft Azure. 
 
+##Indice
+<ul>
+	<li><a href="Descrizione">Descrizione</a></li>
+	<li></li>
+</ul>
+
 ## Descrizione
 L’utente si ritrova inizialmente in una pagina dove deve decidere tra registrazione e login. Essendo il primo accesso decide di registrarsi, inserendo un username (univoco) una password e una foto istantanea che servirà per il suo riconoscimento facciale per i prossimi accessi. Completata la procedura si ritroverà nella HomePage dell’app.
 Effettuando successivamente il login può scegliere se effettuare l’accesso in modo classico (username e password) oppure con username e <b>riconoscimento facciale</b>. Utilizzando quest’ultimo all’accesso verrà fatto <b>l'emotion recognition</b> della foto (8 tipi diversi di emozioni percepite), in base a quest'ultima verrà visualizzato un tema differente dell'app (ogni colore messo ad hoc per mantenere o cambiare l'umore dell'utente in maniera positiva) e un messaggio di benvenuto. 
