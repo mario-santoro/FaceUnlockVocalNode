@@ -15,6 +15,7 @@ Ha come scopo quello di utilizzare i servizi offerti da Microsoft Azure.
 	<li> <a href="https://github.com/mario-santoro/RecognitionNote#installazione-di-pacchetti-nuget">Installazione di pacchetti NuGet</a></li>
 	<li> <a href="https://github.com/mario-santoro/RecognitionNote#about-us">About us</a></li>
 </ul>
+
 ## Contesto
 Lo scopo di quest’applicazione è fornire un servizio di note testuali che ha come obiettivo quello di percepire lo stato emotivo dell’utente scattando una foto in tempo reale effettuando l'accesso all'applicativo, e attraverso uno studio dei colori cerca di migliorare il suo umore o mantenerlo positivo cambiando user interface nel modo appropriato e cambiando frase di benvenuto a seconda dell'emozione percepita.<br>
 Poi attraverso sentiment analysis del testo, quando l'utente scrive una nota o cattura il testo da un immagine, capisce se l’umore è migliorato o meno assegnando all'intero periodo un emoji posizionata alla fine della frase.
