@@ -31,7 +31,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 ## Prerequisiti
 <ul>
 	<li>Sottoscrizione Azure</li>
-	<li>C#</li>
+	<li>Visual Studio</li>
 </ul>
 
 
