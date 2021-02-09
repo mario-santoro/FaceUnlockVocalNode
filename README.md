@@ -48,7 +48,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 
 ## Usage
 <ul>
-	<li><a href="https://docs.microsoft.com/it-it/azure/azure-sql/database/single-database-create-quickstart?tabs=azure-portal">Database SQL</a>:  Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la risorsa SQL, accedendo prima al pannello di creazione di un Database SQL presente nella pagina "Risorse" di Azure, successivametne creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
+	<li><a href="https://docs.microsoft.com/it-it/azure/azure-sql/database/single-database-create-quickstart?tabs=azure-portal">Database SQL</a>:  Una volta recatosi sul portale Azure di Microsoft l'utente dovrà creare la risorsa SQL, accedendo prima al pannello di creazione di un Database SQL presente nella pagina "Risorse" di Azure, successivamente creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
 	<ul>
 		<li>In Gruppo di risorse selezionare Crea nuovo, immettere myResourceGroup e quindi fare clic su OK</li>
 		<li>In Nome database immettere il nome del database</li>
@@ -68,14 +68,14 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 		<li>Selezionare Avanti: Impostazioni aggiuntive nella parte inferiore della pagina.</li>
 		<li>Selezionare Rivedi e crea nella parte inferiore della pagina</li>		
 	</ul>
-	<li><a href="https://docs.microsoft.com/it-it/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows">Servizi cognitivi</a>: L'utente si trova sul portale Azure cliccando su Servizi cognitivi si troverà nel marketplace dei servizi cognitivi, e tramtie la barra di ricerca potrò cercare i seguenti servizi:
+	<li><a href="https://docs.microsoft.com/it-it/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows">Servizi cognitivi</a>: L'utente si trova sul portale Azure cliccando su Servizi cognitivi si troverà nel marketplace dei servizi cognitivi, e tramite la barra di ricerca potrò cercare i seguenti servizi:
 	<ul>
-		<li>Viso: Una volta recatosi sul protale Azure di Microsoft l'utente dovrà creare la risorsa Face, accedendo prima al pannello di creazione di servizi cognitivi presente nella pagina "Risorse" di Azure, successivametne creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
+		<li>Viso: Una volta recatosi sul portale Azure di Microsoft l'utente dovrà creare la risorsa Face, accedendo prima al pannello di creazione di servizi cognitivi presente nella pagina "Risorse" di Azure, successivamente creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
 		<ul>
 			<li>Gruppo di risorse (Cerarne uno nuovo nel caso non vi è presente già uno precedentemente creato)</li>
 			<li>Settare la regione del server a quale fare riferimento</li>
 			<li>Settare il nome della risorsa che si sta creando</li>
-			<li>Andare a selezionare la fatturazizone del servizio, F0 darà risorse gratis fino a 20 chiamate al minuto e 30k chiamate al mese</li>
+			<li>Andare a selezionare la fatturazione del servizio, F0 darà risorse gratis fino a 20 chiamate al minuto e 30k chiamate al mese</li>
 		</ul>
 		<li>Visione artificiale, per OCR e lettura: l'utente cliccherà sul bottone crea e avrà avanti a se la schermata con le varie impostazioni da settare:</li> 
 		<ul>
@@ -90,16 +90,16 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 			<li>Piano tariffario, F0 che darà gratis 5k transizioni per i primi 30 giorni</li>
 		</ul>
 	</ul>
-	<li>Creazione PersonGroup, recarsi alla pagina relativa delle <a href="https://westeurope.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244">API</a> selezionare la regione del server sul quale la risorsa viene utilizzata, e nella seguente pagina andare a cambiare il Name con la seconda opzione disponibile, per poter inserire il Resource Name, inserire un personGroup ID a ropria scelta, inserire la propria OCP key, precedentemente presa dal servizio sul portale Azure, e scendere a fondo pagina per poter cliccare su Send, aspettare il responso positivo dell'operazione (200 OK) e andare a sostituire l'id del personGroup appena scelto all'interno del file "MyCognitive.cs"</li>
-	<li>Per poter utilizzare il DatabaseSQL bisogna prima andaare a creare le tabelle, quindi recarsi sulla risorsa presente sul portale Azure e cliccare, tramite il menù laterale sinistro, su editor di query e inserire le tabelle presenti nella repository nella cartella "Tabelle Database". Successivametne prendere il nome del server e andare nel file MySQL.cs e sostituire con le proprie credenziali: DataSource (nomeserver), UserID, Password, InitialCatalog (nome DB)</li>
-	<li>Per poter utilizzare i servizi cognitivi, recarsi in ognuna delle risorse create e prendere le rispettiche chiavi (Key) ed endpoint, e andarli a sostituire nel file MyCognitive.cs</li>
+	<li>Creazione PersonGroup, recarsi alla pagina relativa delle <a href="https://westeurope.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244">API</a> selezionare la regione del server sul quale la risorsa viene utilizzata, e nella seguente pagina andare a cambiare il Name con la seconda opzione disponibile, per poter inserire il Resource Name, inserire un personGroup ID a propria scelta, inserire la propria OCP key, precedentemente presa dal servizio sul portale Azure, e scendere a fondo pagina per poter cliccare su Send, aspettare il responso positivo dell'operazione (200 OK) e andare a sostituire l'id del personGroup appena scelto all'interno del file "MyCognitive.cs"</li>
+	<li>Per poter utilizzare il DatabaseSQL bisogna prima andare a creare le tabelle, quindi recarsi sulla risorsa presente sul portale Azure e cliccare, tramite il menù laterale sinistro, su editor di query e inserire le tabelle presenti nella repository nella cartella "Tabelle Database". Successivamente prendere il nome del server e andare nel file MySQL.cs e sostituire con le proprie credenziali: DataSource (nomeserver), UserID, Password, InitialCatalog (nome DB)</li>
+	<li>Per poter utilizzare i servizi cognitivi, recarsi in ognuna delle risorse create e prendere le rispettive chiavi (Key) ed endpoint, e andarli a sostituire nel file MyCognitive.cs</li>
 	
 </ul>
 
 
 
 ## Installazione di pacchetti NuGet
-Per poter andare a utilizzare librerie che si interfacciano con gli strumenti messi a disposizione da Azure, da Visual Studio bisogna, dopo aver creato un progetto App Android (Xamarin), bisogna cliccare con il tasto destro sul nome del progetto, presente nel pannello esplora risorse sulla destra dell'interfaccia, e selezionare l'opzione pacchetti NuGet, da qui ci si aprirà una schermata dalla quale potremmo vedere i pacchetti già installati, quelli da aggiornare e installarne di nuovi. Cliccando sul tab "installa" avremo avanti una schermata che ci proporrà tutti i pacchetti messi a disposizione, e tramtite una ricerca possiamo andare a filtrare i pacchetti proposti. Quelli da ricercare e installare sono i seguenti: 
+Per poter andare a utilizzare librerie che si interfacciano con gli strumenti messi a disposizione da Azure, da Visual Studio bisogna, dopo aver creato un progetto App Android (Xamarin), bisogna cliccare con il tasto destro sul nome del progetto, presente nel pannello esplora risorse sulla destra dell'interfaccia, e selezionare l'opzione pacchetti NuGet, da qui ci si aprirà una schermata dalla quale potremmo vedere i pacchetti già installati, quelli da aggiornare e installarne di nuovi. Cliccando sul tab "installa" avremo avanti una schermata che ci proporrà tutti i pacchetti messi a disposizione, e tramite una ricerca possiamo andare a filtrare i pacchetti proposti. Quelli da ricercare e installare sono i seguenti: 
 <ul>
 	<li>System.Data.SqlClient</li>
 	<li>Cognitive services</li>
