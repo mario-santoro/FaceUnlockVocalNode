@@ -23,10 +23,10 @@ namespace FaceUnlockVocalNode
         public MySQL()
         {
             builder = new SqlConnectionStringBuilder();
-             builder.DataSource = "recognitionoteserver.database.windows.net";
-             builder.UserID = "id";
-             builder.Password = "passw";
-             builder.InitialCatalog = "recognitioNoteDB"; 
+             builder.DataSource = "<nome-del-server>";
+             builder.UserID = "<User-id>";
+             builder.Password = "<password>";
+             builder.InitialCatalog = "<Nome-DB>"; 
             //return builder;
         }
 
