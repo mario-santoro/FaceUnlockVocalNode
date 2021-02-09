@@ -7,13 +7,17 @@ Ha come scopo quello di utilizzare i servizi offerti da Microsoft Azure.
 
 ## Indice
 <ul>
+	<li> <a href="https://github.com/mario-santoro/RecognitionNote#contesto">Contesto</a></li>
 	<li> <a href="https://github.com/mario-santoro/RecognitionNote#descrizione">Descrizione</a></li>
 	<li> <a href="https://github.com/mario-santoro/RecognitionNote#architettura">Architettura</a></li>
-	<li> <a href="https://github.com/mario-santoro/RecognitionNote#componenti-di-microsoft-azure-utilizzate">Componenti di Microsoft Azure utilizzate</a></li>
+	<li> <a href="https://github.com/mario-santoro/RecognitionNote#risorse">Risorse</a></li>
 	<li> <a href="https://github.com/mario-santoro/RecognitionNote#usage">Usage</a></li>
 	<li> <a href="https://github.com/mario-santoro/RecognitionNote#installazione-di-pacchetti-nuget">Installazione di pacchetti NuGet</a></li>
 	<li> <a href="https://github.com/mario-santoro/RecognitionNote#about-us">About us</a></li>
 </ul>
+## Contesto
+Lo scopo di quest’applicazione è fornire un servizio di note testuali che ha come obiettivo quello di percepire lo stato emotivo dell’utente scattando una foto in tempo reale effettuando l'accesso all'applicativo, e attraverso uno studio dei colori cerca di migliorare il suo umore o mantenerlo positivo cambiando user interface nel modo appropriato e cambiando frase di benvenuto a seconda dell'emozione percepita.<br>
+Poi attraverso sentiment analysis del testo, quando l'utente scrive una nota o cattura il testo da un immagine, capisce se l’umore è migliorato o meno assegnando all'intero periodo un emoji posizionata alla fine della frase.
 
 ## Descrizione
 L’utente si ritrova inizialmente in una pagina dove deve decidere tra registrazione e login. Essendo il primo accesso decide di registrarsi, inserendo un username (univoco) una password e una foto istantanea che servirà per il suo riconoscimento facciale per i prossimi accessi. Completata la procedura si ritroverà nella HomePage dell’app.
@@ -23,7 +27,14 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 ## Architettura
 <img align="center" height="250" src="https://github.com/mario-santoro/RecognitionNote/blob/master/immagini/architettura.jpg?raw=true" >
 
-## Componenti di Microsoft Azure utilizzate 
+## Prerequisiti
+<ul>
+	<li>Sottoscrizione Azure</li>
+	<li>C#</li>
+</ul>
+
+
+## Risorse
  <ul>
 	<li>Database SQL: per memorizzare in maniera persistente i dati anagrafici e di accesso dell’utente e le note testuali.</li>
 	<li>l'API Visione artificiale in Servizi cognitivi di Azure: 
@@ -93,4 +104,9 @@ Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-pre
 ```
 
 ## About Us
+<b>Autori</b>:
+<ul> 
+	<li>Mario Santoro</li>
+	<li>Raffaele Marino</li>
+</ul>
 <img align="center" height="300" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/immagini/aboutUs.png" >
