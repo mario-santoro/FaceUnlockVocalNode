@@ -7,8 +7,12 @@ Ha come scopo quello di utilizzare i servizi offerti da Microsoft Azure.
 
 ## Indice
 <ul>
-	<li> <a href="https://github.com/mario-santoro/RecognitionNote#Descrizione">Descrizione</a></li>
-	<li></li>
+	<li> <a href="https://github.com/mario-santoro/RecognitionNote#descrizione">Descrizione</a></li>
+	<li> <a href="https://github.com/mario-santoro/RecognitionNote#architettura">Architettura</a></li>
+	<li> <a href="https://github.com/mario-santoro/RecognitionNote#componenti-di-microsoft-azure-utilizzate">Componenti di Microsoft Azure utilizzate</a></li>
+	<li> <a href="https://github.com/mario-santoro/RecognitionNote#usage">Usage</a></li>
+	<li> <a href="https://github.com/mario-santoro/RecognitionNote#installazione-di-pacchetti-nuget">Installazione di pacchetti NuGet</a></li>
+	<li> <a href="https://github.com/mario-santoro/RecognitionNote#about-us">About us</a></li>
 </ul>
 
 ## Descrizione
