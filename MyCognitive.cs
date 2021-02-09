@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +35,7 @@ namespace FaceUnlockVocalNode.Resources
         //chiave per servizio cognitivo per sentiment analisys del testo
 
         //metodo che fa una richiesta API per utilizzare la funzionalità Detect del riconoscimento facciale: dato in in input un path di una immagine, ne crea un faceId
-        //inoltre identifica anche l'emozione percepita dalla foto, la variabile numFrase è un intero che ci identifica l'emozione, emozioneMassima e numFrase sono array di gramndezza 1
+        //inoltre identifica anche l'emozione percepita dalla foto, la variabile numFrase è un intero che ci identifica l'emozione, emozioneMassima e numFrase sono array di grandezza 1
         //in modo da essere modificati per riferimento 
         public static string Detect(string imageFilePath, string[] emozioneMassima, int[] numFrase)
         {
@@ -101,7 +101,7 @@ namespace FaceUnlockVocalNode.Resources
             //request della richiesta
             var request = (HttpWebRequest)WebRequest.Create("https://<nome-risorsa-Viso>.cognitiveservices.azure.com/face/v1.0/identify?recognitionModel=recognition_03");
             //settaggio dei parametri dalla request
-            var postData = "{\"PersonGroupId\": \"1\",\"faceIds\":[\"" + img + "\"], \"maxNumOfCandidatesReturned\": 1, \"confidenceThreshold\": 0.5}";
+            var postData = "{\"PersonGroupId\": \"<Nome_personGroup>\",\"faceIds\":[\"" + img + "\"], \"maxNumOfCandidatesReturned\": 1, \"confidenceThreshold\": 0.5}";
             var data = Encoding.UTF8.GetBytes(postData);
             request.Method = "POST";
             request.ContentType = "application/json";
@@ -143,7 +143,7 @@ namespace FaceUnlockVocalNode.Resources
         public static string addPerson(string nome, string userData)
         {
             //request della richiesta
-            var request = (HttpWebRequest)WebRequest.Create("https://<nome-risorsa-Viso>.cognitiveservices.azure.com/face/v1.0/persongroups/1/persons?recognitionModel=recognition_03");
+            var request = (HttpWebRequest)WebRequest.Create("https://<nome-risorsa-Viso>.cognitiveservices.azure.com/face/v1.0/persongroups/<nome_personGroup>/persons?recognitionModel=recognition_03");
             //settaggio dei parametri dalla request
             var postData = "{\"name\": \"" + nome + "\",\"userData\":\"" + userData + "\"}";
             var data = Encoding.UTF8.GetBytes(postData);
@@ -172,7 +172,7 @@ namespace FaceUnlockVocalNode.Resources
         public static void addFace(string personId, string pathImage)
         {
             //request della richiesta
-            var request = (HttpWebRequest)WebRequest.Create("https://<nome-risorsa-Viso>.cognitiveservices.azure.com/face/v1.0/persongroups/1/persons/" + personId + "/persistedFaces?detectionModel=detection_01&recognitionModel=recognition_03");
+            var request = (HttpWebRequest)WebRequest.Create("https://<nome-risorsa-Viso>.cognitiveservices.azure.com/face/v1.0/persongroups/<nome_personGroup>/persons/" + personId + "/persistedFaces?detectionModel=detection_01&recognitionModel=recognition_03");
             // l'immagine viene converita in un array di byte per essere passata comestream di dati
             byte[] byteData = GetImageAsByteArray(pathImage);
             //settaggio dei parametri della request
