@@ -7,7 +7,7 @@ Ha come scopo quello di utilizzare i servizi offerti da Microsoft Azure.
 
 ## Indice
 <ul>
-	<li> [Descrizione](https://github.com/mario-santoro/RecognitionNote#Descrizione) - Descrizione</li>
+	<li> <a href="https://github.com/mario-santoro/RecognitionNote#Descrizione">Descrizione</a></li>
 	<li></li>
 </ul>
 
