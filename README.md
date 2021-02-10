@@ -1,6 +1,6 @@
 # RecognitionNote
 
-<img align="center" height="204" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/immagini/icona cloud.png" >
+<img align="center" height="204" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/documentazione/immagini/icona cloud.png" >
 
 Questa è un app Android sviluppata per l'esame di laurea magistrale informatica curriculum Cloud Computing dell'Università degli Studi di Salerno.
 Ha come scopo quello di utilizzare i servizi offerti da Microsoft Azure. 
@@ -26,7 +26,7 @@ Effettuando successivamente il login può scegliere se effettuare l’accesso in
 Il servizio in sé permette all’utente di tener traccia di note testuali (inserimento, cancellazione e modifica) con la possibilità di scattare una foto a del testo o un immagine contenente testo e poi il servizio cognitivo <b>riconosce il testo</b> in essa contenuta e in maniera automatica inserisce il testo riconosciuto nel contenuto della nota, pronta per essere salvata o modificata. Infine con il <b>Sentiment Analysis</b> del testo viene inserita un emoji a seconda del sentimento riscontrato nel testo.
 
 ## Architettura
-<img align="center" height="250" src="https://github.com/mario-santoro/RecognitionNote/blob/master/immagini/architettura.jpg?raw=true" >
+<img align="center" height="250" src="https://github.com/mario-santoro/RecognitionNote/blob/master/documentazione/immagini/architettura.jpg?raw=true" >
 
 ## Prerequisiti
 <ul>
@@ -91,7 +91,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 		</ul>
 	</ul>
 	<li>Creazione PersonGroup, recarsi alla pagina relativa delle <a href="https://westeurope.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244">API</a> selezionare la regione del server sul quale la risorsa viene utilizzata, e nella seguente pagina andare a cambiare il Name con la seconda opzione disponibile, per poter inserire il Resource Name, inserire un personGroup ID a propria scelta, inserire la propria OCP key, precedentemente presa dal servizio sul portale Azure, e scendere a fondo pagina per poter cliccare su Send, aspettare il responso positivo dell'operazione (200 OK) e andare a sostituire l'id del personGroup appena scelto all'interno del file "MyCognitive.cs"</li>
-<li>Per importare il DataBase, con un qualsiasi programma di gestione Database (ad esempio Navicat) collegarsi all’istanza del DB con le credenziali scritte precedentemente importare il file "recognitionNote.sql" presente nella repository
+<li>Per importare il DataBase, con un qualsiasi programma di gestione Database (ad esempio Navicat) collegarsi all’istanza del DB con le credenziali scritte precedentemente importare il file sql in documentazione "recognitionNote.sql" presente nella repository
 </li>
 	<li>Per poter utilizzare i servizi cognitivi, recarsi in ognuna delle risorse create e prendere le rispettive chiavi (Key) ed endpoint, e andarli a sostituire nel file MyCognitive.cs</li>
 	
@@ -117,4 +117,4 @@ Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.6.0-pre
 	<li>Mario Santoro</li>
 	<li>Raffaele Marino</li>
 </ul>
-<img align="center" height="300" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/immagini/aboutUs.png" >
+<img align="center" height="300" src="https://github.com/mario-santoro/FaceUnlockVocalNote/blob/master/documentazione/immagini/aboutUs.png" >
