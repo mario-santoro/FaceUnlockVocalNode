@@ -44,8 +44,12 @@ namespace FaceUnlockVocalNode
             img.Click += CamptureButton_Click;
             EditText cont = (EditText)FindViewById(Resource.Id.contenuto);
               start = 0;
+              //listner sulla EditText che controlla ogni volta che c'è un cambiamento di testo
             cont.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
+            
+            //prendiamo il testo inserito lo convertiamo in stringa e ne controlliamo l'ultimo carattere inserito, se questo è un "." allora indica che
+            //la frase/periodo è finita è deve fare il sentiment analysis
                 string s = cont.Text.ToString();
       
                 int finish = 0;
