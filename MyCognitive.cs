@@ -58,7 +58,7 @@ namespace FaceUnlockVocalNode.Resources
             //prendiamo la response e la convertiamo in un oggetto json
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            Console.WriteLine("Risultati: " + responseString);
+           
             dynamic json = JsonConvert.DeserializeObject(responseString);
             //array con le percentuali di ogni emozione percepita nella foto analizzata
             double[] valoreEmozioni = { (double)json[0].faceAttributes.emotion.anger, (double)json[0].faceAttributes.emotion.contempt, (double)json[0].faceAttributes.emotion.disgust, (double)json[0].faceAttributes.emotion.fear, (double)json[0].faceAttributes.emotion.happiness, (double)json[0].faceAttributes.emotion.neutral, (double)json[0].faceAttributes.emotion.sadness, (double)json[0].faceAttributes.emotion.surprise };
@@ -160,9 +160,9 @@ namespace FaceUnlockVocalNode.Resources
             //prendiamo la response e la convertiamo in un oggetto json
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            Console.WriteLine("Risultati: " + responseString);
+           
             dynamic json = JsonConvert.DeserializeObject(responseString);
-            //restituiamo il personId 
+            
             return json.personId;
 
         }
@@ -189,7 +189,7 @@ namespace FaceUnlockVocalNode.Resources
             //prendiamo la response e la convertiamo in un oggetto json
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            Console.WriteLine("Risultati: " + responseString);
+            
 
 
         }
@@ -266,7 +266,7 @@ namespace FaceUnlockVocalNode.Resources
 
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            Console.WriteLine("Risultati: " + responseString);
+           
             dynamic json = JsonConvert.DeserializeObject(responseString);
             string testo = "";
             //scorre l'oggetto json per salvare il testo trovato in una stringa da restituire in input
