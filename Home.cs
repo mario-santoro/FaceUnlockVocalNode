@@ -169,7 +169,7 @@ namespace FaceUnlockVocalNode
                     ;
 
                 default:
-                    //   SetTheme(Resource.Style.AppThemeNeutral);
+              
 
                     break;
                     ;
