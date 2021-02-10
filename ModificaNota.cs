@@ -46,8 +46,11 @@ namespace FaceUnlockVocalNode
             EditText contenuto = (EditText)FindViewById(Resource.Id.contenutoMod);
             contenuto.Text += c;
             start = 0;
+            //listener sulla edit text che controlla ogni volta che c'è un cambiamento di testo
             contenuto.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
             {
+                //prendiamo il testo inserito, lo convertiamo in stringa e ne controlliamo l'ultimo carattere inserito.
+                //Se questo è un "." allora indica che la frase/periodo è finita e deve farne il Sentiment Analysis.
                 string s = contenuto.Text.ToString();
 
                 int finish = 0;
@@ -72,7 +75,7 @@ namespace FaceUnlockVocalNode
                     {
                         finish = i - 1;
                         String pezzoText = s.Substring(start, finish - start);
-                        Console.WriteLine("Prova: " + pezzoText);
+                      
                         double score = FaceUnlockVocalNode.Resources.MyCognitive.getSentimentText(pezzoText);
                         String emoji = "";
                         if (score >= 0.60)
@@ -112,7 +115,8 @@ namespace FaceUnlockVocalNode
 
             l = FindViewById<LinearLayout>(Resource.Id.m);
             foto = FindViewById<Button>(Resource.Id.mfoto);
-            Salva = FindViewById<Button>(Resource.Id.modifica);
+            Salva = FindViewById<Button>(Resource.Id.modifica);ù
+            // a seconda dell'emozione cambiamo colore interfaccia
             emozione = Intent.GetStringExtra("emozione");
             switch (emozione)
             {
@@ -209,7 +213,7 @@ namespace FaceUnlockVocalNode
                     ;
 
                 default:
-                    //   SetTheme(Resource.Style.AppThemeNeutral);
+                
 
                     break;
                     ;
@@ -253,8 +257,7 @@ namespace FaceUnlockVocalNode
 
             n.setContenuto(contenuto);
             //prendiamo la data corrente e lo settiamo nell'oggetto Nota
-            DateTime d = DateTime.Now;
-            Console.WriteLine("Data della nota: " + d);
+            DateTime d = DateTime.Now;            
             n.setData(d.ToString());
             //richiamiamo il metodo per modificare la nota nel DB passandogli l'oggetto nota
             MySQL m = new MySQL();
@@ -276,13 +279,12 @@ namespace FaceUnlockVocalNode
         public void CamptureButton_Click(object sender, System.EventArgs eventArgs)
         {
             TakePhoto();
-            // img.Visibility = ViewStates.Visible;
+         
         }
 
+        
         private String Emoji(int co)
         {
-
-            //   int[] codes = new int[] { 0x1F468, 0x200D, 0x1F4BB } ;
 
             int[] codes = new int[] { co };
             var sb = new StringBuilder(codes.Length);
@@ -315,6 +317,7 @@ namespace FaceUnlockVocalNode
             String testo = FaceUnlockVocalNode.Resources.MyCognitive.getText(path);
             //il testo riconosciuti viene aggiunto nel contenuto della nota nell'EditText
             EditText contenuto = (EditText)FindViewById(Resource.Id.contenutoMod);
+            //verifichiamo con il sentiment Analysis se lo score è positivo o negativo
             double score = FaceUnlockVocalNode.Resources.MyCognitive.getSentimentText(testo);
             contenuto.Text += testo;
             if (score >= 0.60)
