@@ -91,16 +91,6 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 		</ul>
 	</ul>
 	<li>Creazione PersonGroup, recarsi alla pagina relativa delle <a href="https://westeurope.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244">API</a> selezionare la regione del server sul quale la risorsa viene utilizzata, e nella seguente pagina andare a cambiare il Name con la seconda opzione disponibile, per poter inserire il Resource Name, inserire un personGroup ID a propria scelta, inserire la propria OCP key, precedentemente presa dal servizio sul portale Azure, e scendere a fondo pagina per poter cliccare su Send, aspettare il responso positivo dell'operazione (200 OK) e andare a sostituire l'id del personGroup appena scelto all'interno del file "MyCognitive.cs"</li>
-	 <li>Database MySQL: &nbsp; Una volta recatosi sul portale Azure di Microsoft l&apos;utente dovr&agrave; creare la risorsa MySQL, accedendo prima al pannello di creazione di un Database MySQL presente nella pagina &quot;Risorse&quot; di Azure, successivamente creare la risorsa cliccando sul bottone &quot;crea risorsa&quot; e andare a settare i seguenti parametri:<ul class="decimal_type" style="list-style-type: square;">
-                    <li>In Gruppo di risorse selezionare Crea nuovo, immettere nome del person group e quindi fare clic su OK</li>
-                    <li>In Nome del server immettere il nome del database</li>
-                    <li>In localit&agrave; selezionare &quot;Europa Occidentale&quot;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;</li>
-                    <li>Versione 5.7</li>
-                    <li>Calcolo e archiviazione selezionare lo spazio e V.core che si intende utilizzare, (Basic 1vCore, 5GB al costo di 25,43 EUR al mese &egrave; stata la nostra scelta)</li>
-                    <li>In Nome amministratore settare il nome dell&apos;amministratore</li>
-                    <li>Dopodich&eacute; settare la password del DB e confermarla</li>
-                    <li>Infine in rivedi e crea premere su &quot;Crea&quot;</li>
-                    <li>Dopodiché per importare il DB, andare sulla risorsa e in sicurezza delle connessioni: disabilitare “imponi connessione SSl” e premere su Aggiungere 0.0.0.0 - 255.255.255.255</li>
 <li>Poi con un qualsiasi programma di gestione Database (ad esempio Navicat) collegarsi all’istanza del DB con le credenziali scritte precedentemente importare il file "recognitionNote.sql" presente nella repository
 </li>
 	<li>Per poter utilizzare i servizi cognitivi, recarsi in ognuna delle risorse create e prendere le rispettive chiavi (Key) ed endpoint, e andarli a sostituire nel file MyCognitive.cs</li>
