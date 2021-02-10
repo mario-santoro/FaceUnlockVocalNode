@@ -70,7 +70,7 @@ namespace FaceUnlockVocalNode
                     {
                         finish = i - 1;
                         String pezzoText = s.Substring(start, finish-start);
-                        Console.WriteLine("Prova: " + pezzoText);
+                        
                         double score = FaceUnlockVocalNode.Resources.MyCognitive.getSentimentText(pezzoText);
                         String emoji = "";
                         if (score >= 0.60)
@@ -110,7 +110,6 @@ namespace FaceUnlockVocalNode
                     foto.SetBackgroundResource(Resource.Color.colorPrimaryHappiness);
                     Salva.SetBackgroundResource(Resource.Color.colorPrimaryHappiness);
 
-
                     Window.SetStatusBarColor(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.colorPrimaryDarkHappiness)));
                     Window.DecorView.SystemUiVisibility = (StatusBarVisibility)SystemUiFlags.LightStatusBar;
                     break;
@@ -120,7 +119,6 @@ namespace FaceUnlockVocalNode
                     l.SetBackgroundResource(Resource.Color.colorBackgroudnSadness);
                     foto.SetBackgroundResource(Resource.Color.colorPrimarySadness);
                     Salva.SetBackgroundResource(Resource.Color.colorPrimarySadness);
-
 
                     Window.SetStatusBarColor(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.colorPrimaryDarkSadness)));
                     Window.DecorView.SystemUiVisibility = (StatusBarVisibility)SystemUiFlags.LightStatusBar;
@@ -132,7 +130,6 @@ namespace FaceUnlockVocalNode
                     foto.SetBackgroundResource(Resource.Color.colorPrimaryFear);
                     Salva.SetBackgroundResource(Resource.Color.colorPrimaryFear);
 
-
                     Window.SetStatusBarColor(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.colorPrimaryDarkFear)));
                     Window.DecorView.SystemUiVisibility = (StatusBarVisibility)SystemUiFlags.LightStatusBar;
                     break;
@@ -142,7 +139,6 @@ namespace FaceUnlockVocalNode
                     l.SetBackgroundResource(Resource.Color.colorBackgroudnAngry);
                     foto.SetBackgroundResource(Resource.Color.colorPrimaryAngry);
                     Salva.SetBackgroundResource(Resource.Color.colorPrimaryAngry);
-
 
                     Window.SetStatusBarColor(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.colorPrimaryDarkAngry)));
 
@@ -196,8 +192,7 @@ namespace FaceUnlockVocalNode
                     ;
 
                 default:
-                    //   SetTheme(Resource.Style.AppThemeNeutral);
-
+                   
                     break;
                     ;
 
@@ -221,7 +216,7 @@ namespace FaceUnlockVocalNode
             
             //prendo la data corrente e lo setto nell'oggetto
             DateTime d = DateTime.Now;
-            Console.WriteLine("Data della nota: " + d);
+            
             n.setData(d.ToString());
             //recupero dall'intent l'username utente
             String username = Intent.GetStringExtra("username");
@@ -246,9 +241,6 @@ namespace FaceUnlockVocalNode
 
         private String Emoji(int co)
         {
-
-            //   int[] codes = new int[] { 0x1F468, 0x200D, 0x1F4BB } ;
-
             int[] codes = new int[] { co };
             var sb = new StringBuilder(codes.Length);
             var s = "";
@@ -261,7 +253,7 @@ namespace FaceUnlockVocalNode
         public void CamptureButton_Click(object sender, System.EventArgs eventArgs)
         {
             TakePhoto();
-            // img.Visibility = ViewStates.Visible;
+            
         }
 
         //funzione che identifica cosa fare dopo aver fatto la foto
