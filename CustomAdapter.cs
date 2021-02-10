@@ -62,8 +62,7 @@ namespace FaceUnlockVocalNode
                 {
 
                     emozione = context.Intent.GetStringExtra("emozione");
-                    MySQL s = new MySQL();
-                    Console.WriteLine("SONO QUI: " + item.getId_nota());
+                    MySQL s = new MySQL();                  
                     s.deleteNota(item.getId_nota());
                     Intent openPage1 = new Intent(context, typeof(Home));
                     openPage1.PutExtra("username", item.getUsername());
