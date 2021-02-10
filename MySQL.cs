@@ -27,7 +27,7 @@ namespace FaceUnlockVocalNode
              builder.UserID = "<User-id>";
              builder.Password = "<password>";
              builder.InitialCatalog = "<Nome-DB>"; 
-            //return builder;
+            
         }
 
         //metodo per il login utente con credenziali
@@ -40,7 +40,7 @@ namespace FaceUnlockVocalNode
             {
               
                 StringBuilder sb = new StringBuilder();
-                //query
+                
                 sb.Append("SELECT username From utente where username= '" + username + "' AND passw='" + Hash(password)+ "';");
                 String sql = sb.ToString();
 
@@ -52,7 +52,7 @@ namespace FaceUnlockVocalNode
                     {
                         if (reader.Read())//se esiste l'utente restituisce true altrimenti false
                         {
-                            Console.WriteLine("{0}", reader.GetString(0));
+                           
                             return true;
                         }
                         else
@@ -129,7 +129,7 @@ namespace FaceUnlockVocalNode
                     {
                         if (reader.Read())
                         {
-                            Console.WriteLine("{0}", reader.GetString(0));
+                            
                             return true;
                         }
                         else
@@ -193,7 +193,7 @@ namespace FaceUnlockVocalNode
         //inserimento utente, cioè registrazione
         public Boolean inserimentoUtente(String text, String pasw)
         {
-            Console.WriteLine("la password hash: "+pasw);
+            
             pasw = Hash(pasw);
              
             
@@ -370,7 +370,7 @@ namespace FaceUnlockVocalNode
                     {
                         if (reader.Read())
                         {
-                            Console.WriteLine("Cancellato");
+                            
                         }
 
                     }
