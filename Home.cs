@@ -73,7 +73,7 @@ namespace FaceUnlockVocalNode
             l = FindViewById<LinearLayout>(Resource.Id.home);
             logout = FindViewById<Button>(Resource.Id.logout);
             addNota = FindViewById<Button>(Resource.Id.addNota);
-
+            // a seconda dell'emozione riscontrata viene setatta l'interfaccia utente
             switch (emozione)
             {
 
