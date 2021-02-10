@@ -15,46 +15,21 @@ namespace FaceUnlockVocalNode
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-       // public event System.Timers.ElapsedEventHandler Elapsed;
-        //private static Timer aTimer;
+      
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            // Set our view from the "main" layout resource
+       
             SetContentView(Resource.Layout.activity_main);
             Button b1 = (Button)FindViewById(Resource.Id.button);
             b1.Click += LogOnClick;
 
             Button b2 = (Button)FindViewById(Resource.Id.buttonReg);
             b2.Click += RegOnClick;
-
-         
-           /*
-            aTimer = new System.Timers.Timer();
-            aTimer.Interval = 5000;
-
-            // Hook up the Elapsed event for the timer. 
-            aTimer.Elapsed += OnTimedEvent;
-
-            // Have the timer fire repeated events (true is the default)
-            aTimer.AutoReset = true;
-
-            // Start the timer
-            aTimer.Enabled = true;
-
-            Console.WriteLine("Press the Enter key to exit the program at any time... ");
-            Console.ReadLine();
-          */
+ 
         }
-        /*
-                private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
-                {
-                    Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);
-
-                }
-
-            */
+ 
 
       
 
