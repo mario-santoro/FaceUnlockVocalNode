@@ -53,7 +53,7 @@ namespace FaceUnlockVocalNode
             username = (EditText)FindViewById(Resource.Id.textUser);
             user = username.Text.ToString();
             MySQL m = new MySQL();
-            //controlliamo che l'utente esista nel Databse
+            //controlliamo che l'utente esista nel Database
             Boolean flag = m.controlloUtente(user);
 
             View view = (View)sender;
@@ -63,7 +63,7 @@ namespace FaceUnlockVocalNode
                 int[] numFrase = new int[1];
                 //richiamiamo il metodo detect per analizzare l'emozione della foto e per ottenere il faceId della foto
                 var id = FaceUnlockVocalNode.Resources.MyCognitive.Detect(path, emozione, numFrase);
-                //richimiamo il metodo identify per controlalre se la foto con il faceId generato appartiene a una Person del PersonGroup
+                //richiamiamo il metodo identify per controllare se la foto con il faceId generato appartiene a una Person del PersonGroup
                 string idP = FaceUnlockVocalNode.Resources.MyCognitive.identify(id);
                 if (idP != "")
                 { //se esiste un utente con questa faccia avrà un id diverso da stringa vuota
@@ -119,7 +119,7 @@ namespace FaceUnlockVocalNode
         public void CamptureButton_Click(object sender, System.EventArgs eventArgs)
         {
             TakePhoto();
-            // img.Visibility = ViewStates.Visible;
+ 
         }
 
         //definisce il comportamento dopo aver scattato la foto
