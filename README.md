@@ -91,7 +91,7 @@ Il servizio in sé permette all’utente di tener traccia di note testuali (inse
 		</ul>
 	</ul>
 	<li>Creazione PersonGroup, recarsi alla pagina relativa delle <a href="https://westeurope.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244">API</a> selezionare la regione del server sul quale la risorsa viene utilizzata, e nella seguente pagina andare a cambiare il Name con la seconda opzione disponibile, per poter inserire il Resource Name, inserire un personGroup ID a propria scelta, inserire la propria OCP key, precedentemente presa dal servizio sul portale Azure, e scendere a fondo pagina per poter cliccare su Send, aspettare il responso positivo dell'operazione (200 OK) e andare a sostituire l'id del personGroup appena scelto all'interno del file "MyCognitive.cs"</li>
-<li>Poi con un qualsiasi programma di gestione Database (ad esempio Navicat) collegarsi all’istanza del DB con le credenziali scritte precedentemente importare il file "recognitionNote.sql" presente nella repository
+<li>Per importare il DataBase, con un qualsiasi programma di gestione Database (ad esempio Navicat) collegarsi all’istanza del DB con le credenziali scritte precedentemente importare il file "recognitionNote.sql" presente nella repository
 </li>
 	<li>Per poter utilizzare i servizi cognitivi, recarsi in ognuna delle risorse create e prendere le rispettive chiavi (Key) ed endpoint, e andarli a sostituire nel file MyCognitive.cs</li>
 	
