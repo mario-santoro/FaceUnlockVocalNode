@@ -89,7 +89,7 @@ namespace FaceUnlockVocalNode
         public void CamptureButton_Click(object sender, System.EventArgs eventArgs)
         {
             TakePhoto();
-            // img.Visibility = ViewStates.Visible;
+            
         }
 
         //definisce il comportamento dopo aver scattato la foto
